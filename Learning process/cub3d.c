@@ -1,6 +1,8 @@
-#include <stdio.h>
+#include "minilibx/mlx.h"
 
-int main()
+int	main(void)
 {
-    printf("Hello world\n");
+	void	*mlx;
+
+	mlx = mlx_init();
 }
