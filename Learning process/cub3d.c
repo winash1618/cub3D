@@ -1,5 +1,6 @@
 #include "minilibx/mlx.h"
-
+#include <math.h>
+#include <stdio.h>
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -25,18 +26,14 @@ int	main(void)
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	img.img = mlx_new_image(mlx, 1920, 1080);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-							&img.endian);
-	int x = 0;
-	while (x <= 500)
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
+	double d = 0;
+	while (d <= 360)
 	{
-		
-		my_mlx_pixel_put(&img, 5, 5 + x, 0x00FF0000);
-		my_mlx_pixel_put(&img, 5 + x, 5, 0x00FF0000);
-		my_mlx_pixel_put(&img, 505, 5 + x, 0x00FF0000);
-		my_mlx_pixel_put(&img, 5 + x, 505, 0x00FF0000);
-		x++;
-
+		double x = 450 + 200*sin(d*(3.14/180));
+		double y = 450 + 200*cos(d*(3.14/180));
+		my_mlx_pixel_put(&img, x, y, 0x00FF0000);
+		d = d + 0.1;
 	}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
