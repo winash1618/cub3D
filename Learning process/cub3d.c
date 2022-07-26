@@ -22,34 +22,25 @@ int	main(void)
 	void	*mlx;
 	void	*mlx_win;
 	t_data	img;
-
+	int height = 1080;
+	int width = 1920;
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
-	img.img = mlx_new_image(mlx, 1920, 1080);
+	mlx_win = mlx_new_window(mlx, width, height, "Hello world!");
+	img.img = mlx_new_image(mlx, width, height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
-	int x = 200;
-	int y = 300;
-	int z = 300;
-	while (x <= 600)
+	double x = 0;
+	double y = 0;
+	int color = 0x00000000;
+	while (x < width)
 	{
-		if (x < 300)
+		y = 0;
+		while (y < height)
 		{
-			my_mlx_pixel_put(&img, x, y++, 0x00FF0000);
-			my_mlx_pixel_put(&img, x, z--, 0x00FF0000);
-		}
-		if (x >= 300 && x <= 500)
-		{
-		my_mlx_pixel_put(&img, x, 400, 0x00FF0000);
-		my_mlx_pixel_put(&img, x, 200, 0x00FF0000);
-
-		}
-		if (x >500 )
-		{
-			my_mlx_pixel_put(&img, x, y--, 0x00FF0000);
-			my_mlx_pixel_put(&img, x, z++, 0x00FF0000);
+			color  = (color + (int)(0xFF * ((x) / width))) << 16;
 		}
 		x++;
 	}
+	
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 }
