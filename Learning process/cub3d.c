@@ -36,7 +36,8 @@ int	main(void)
 		y = 0;
 		while (y < height)
 		{
-			color  = (color + (int)(0xFF * ((x) / width))) << 16;
+			color  = (color + (int)(0xFF * (x / width))) << 16;
+			my_mlx_pixel_put(&img, x, y++,color);
 		}
 		x++;
 	}

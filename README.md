@@ -6,4 +6,4 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 - https://lodev.org/cgtutor/raycasting.html
 
 ## gcc
-- gcc -framework OpenGL -framework AppKit cub3d.c minilibx/libmlx.a 
+- gcc -framework OpenGL -framework AppKit cub3d.c minilibx/libmlx.a && ./a.out
