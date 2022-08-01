@@ -25,6 +25,8 @@ int	main(void)
 	int height = 1080;
 	int width = 1920;
 	mlx = mlx_init();
+	if (!mlx)
+		exit(0);
 	mlx_win = mlx_new_window(mlx, width, height, "Hello world!");
 	img.img = mlx_new_image(mlx, width, height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
