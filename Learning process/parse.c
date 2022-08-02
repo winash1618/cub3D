@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/02 12:13:25 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/02 12:58:45 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ typedef struct	s_data
 	// double	cameraX;
 	// double	rayDirX;
 	// double	rayDirY;
+	int		drawStart;
+	int		drawEnd;
 	
 	
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 }				t_data;
+void raycast(t_data *img);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -160,12 +163,14 @@ int	key_check(int keycode, t_data *img)
 			img->posX += img->dirX;
 		if(img->s[(int)(img->posX)][(int)(img->posY + img->dirY)] == false)
 			img->posY += img->dirY;
+		raycast(img);
 	}
 	else if (keycode == 124)
 	{
       if(img->s[(int)(img->posX - img->dirX)][(int)(img->posY)] == false) img->posX -= img->dirX;
       if(img->s[(int)(img->posX)][(int)(img->posY - img->dirY)] == false) img->posY -= img->dirY;
-    }
+    	raycast(img);
+	}
 	else if (keycode == 125)
 	{
       //both camera direction and camera plane must be rotated
@@ -175,7 +180,8 @@ int	key_check(int keycode, t_data *img)
       double oldPlaneX = img->planeX;
       img->planeX = img->planeX- img->planeY;
       img->planeY = oldPlaneX + img->planeY;
-    }
+    	raycast(img);
+	}
 	else if (keycode == 126)
 	 {
       //both camera direction and camera plane must be rotated
@@ -185,8 +191,120 @@ int	key_check(int keycode, t_data *img)
       double oldPlaneX = img->planeX;
       img->planeX = img->planeX - img->planeY;
       img->planeY = oldPlaneX + img->planeY;
-    }
+    	raycast(img);
+	}
 	return (0);
+}
+void raycast(t_data *img)
+{
+	
+	int x = 0;
+	while (x < screenWidth)
+	{
+		//calculate ray position and direction
+		double cameraX = 2 * x / (double)(screenWidth) - 1; //x-coordinate in camera space
+		double rayDirX = img->dirX + img->planeX * cameraX;
+		double rayDirY = img->dirY + img->planeY * cameraX;
+		//which box of the map we're in
+		int mapX = (int)(img->posX);
+		int mapY = (int)(img->posY);
+
+		//length of ray from current position to next x or y-side
+		double sideDistX;
+		double sideDistY;
+
+		//length of ray from one x or y-side to next x or y-side
+		double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+		double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
+		double perpWallDist;
+
+		//what direction to step in x or y-direction (either +1 or -1)
+		int stepX;
+		int stepY;
+
+		int hit = 0; //was there a wall hit?
+		int side; //was a NS or a EW wall hit?
+		//calculate step and initial sideDist
+		if (rayDirX < 0)
+		{
+			stepX = -1;
+			sideDistX = (img->posX - mapX) * deltaDistX;
+		}
+		else
+		{
+			stepX = 1;
+			sideDistX = (mapX + 1.0 - img->posX) * deltaDistX;
+		}
+		if (rayDirY < 0)
+		{
+			stepY = -1;
+			sideDistY = (img->posY - mapY) * deltaDistY;
+		}
+		else
+		{
+			stepY = 1;
+			sideDistY = (mapY + 1.0 - img->posY) * deltaDistY;
+		}
+		//perform DDA
+		while (hit == 0)
+		{
+			//jump to next map square, either in x-direction, or in y-direction
+			if (sideDistX < sideDistY)
+			{
+				sideDistX += deltaDistX;
+				mapX += stepX;
+				side = 0;
+			}
+			else
+			{
+				sideDistY += deltaDistY;
+				mapY += stepY;
+				side = 1;
+			}
+			// printf("%d %d\n", mapX, mapY);
+			// fflush(stdout);
+			//Check if ray has hit a wall
+			if (ft_strlen(img->s[mapX]) > mapY)
+				if (img->s[mapX][mapY] == '1')
+					hit = 1;
+		} 
+		//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+		if(side == 0)
+			perpWallDist = (sideDistX - deltaDistX);
+		else
+			perpWallDist = (sideDistY - deltaDistY);
+		//Calculate height of line to draw on screen
+		int lineHeight = (int)(screenHeight / perpWallDist);
+
+		//calculate lowest and highest pixel to fill in current stripe
+		img->drawStart = -lineHeight / 2 + screenHeight / 2;
+		if(img->drawStart < 0)img->drawStart = 0;
+		img->drawEnd = lineHeight / 2 + screenHeight / 2;
+		if(img->drawEnd >= screenHeight)img->drawEnd = screenHeight - 1;
+		//choose wall color
+		int color;
+		switch(img->s[mapX][mapY])
+		{
+			case '1':  color = 0x00FF0000;  break; //red
+			case '0':  color = 0x00FFFF00;  break; //green
+			case 'N':  color = 0x0000FF00;   break; //blue
+			default: color = 0x000000FF; break; //yellow
+		}
+
+		//give x and y sides different brightness
+		if (side == 1) {color = color / 2;}
+
+		//draw the pixels of the stripe as a vertical line
+		int i = img->drawStart;
+		while (i < img->drawEnd)
+		{
+			my_mlx_pixel_put(img, x, i, color);
+			i++;
+		}
+		
+		x++;
+	}
+	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 }
 int main(int ac, char **av)
 {
