@@ -9,4 +9,4 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 - gcc -framework OpenGL -framework AppKit cub3d.c minilibx/libmlx.a && ./a.out
 
 
-- gcc parse.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c -D BUFFER_SIZE=1 && ./a.out map.cub
+- gcc -framework OpenGL -framework AppKit parse.c minilibx/libmlx.a get_next_line/get_next_line.c get_next_line/get_next_line_utils.c -D BUFFER_SIZE=1 && ./a.out map.cub
