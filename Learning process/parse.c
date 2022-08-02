@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/01 19:48:54 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/02 07:48:13 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,13 @@ int main(int ac, char **av)
 	mlx_win = mlx_new_window(mlx, screenWidth, screenHeight, "Hello world!");
 	img.img = mlx_new_image(mlx,screenWidth, screenHeight);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
-	double posX = 0, posY = 1;  //x and y start position
+	double posX = 10, posY = 20;  //x and y start position
 	double dirX = -1, dirY = 0; //initial direction vector
 	double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
 	double time = 0; //time of current frame
 	double oldTime = 0; //time of previous frame
-	for(int x = 0; x < screenWidth; x++)
+	int x = 0;
+	while (x < screenWidth)
     {
       //calculate ray position and direction
       double cameraX = 2 * x / (double)(screenWidth) - 1; //x-coordinate in camera space
@@ -246,8 +247,10 @@ int main(int ac, char **av)
 			my_mlx_pixel_put(&img, x, i, color);
 			i++;
 		}
+		x++;
     }
-	
+	// mlx_hook(img.img, 17, 1L << 17, exit, 0);
+	// mlx_hook(img.img, 2, 0, key_check, new);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 	return (0);
