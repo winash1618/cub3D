@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/02 16:23:20 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/03 17:20:02 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 #define mapWidth 24
 #define mapHeight 24
+#define texWidth 64
+#define texHeight 64
 #define screenWidth 1080
 #define screenHeight 960
 #define rotspeed 0.1
@@ -33,6 +35,7 @@ typedef struct	s_data
 	void	*img;
 	void	*win;
 	void	*mlx;
+	int		*texture;
 	char	*addr;
 	double	posX;
 	double	posY;
@@ -41,6 +44,9 @@ typedef struct	s_data
 	double	planeX;
 	double	planeY;
 	char	**s;
+	int	buffer[screenHeight][screenWidth];
+	int width;
+	int height;
 	// double	cameraX;
 	// double	rayDirX;
 	// double	rayDirY;
@@ -156,21 +162,35 @@ char **create_map(int ac, char **av)
 }
 int	key_check(int keycode, t_data *img)
 {
-	if (keycode == 123)
+	if (keycode == 2)
+	{
+		if(img->s[(int)(img->posX + img->planeX)][(int)(img->posY)] == '0')
+			img->posX += img->planeX * 0.1;
+		if(img->s[(int)(img->posX)][(int)(img->posY + img->planeY)] == '0')
+			img->posY += img->planeY * 0.1;
+	}
+	else if (keycode == 0)
+	{
+		if(img->s[(int)(img->posX - img->planeX)][(int)(img->posY)] == '0')
+			img->posX -= img->planeX * 0.1;
+		if(img->s[(int)(img->posX)][(int)(img->posY - img->planeY)] == '0')
+			img->posY -= img->planeY * 0.1;
+	}
+	if (keycode == 13)
 	{
 		if(img->s[(int)(img->posX + img->dirX)][(int)(img->posY)] == '0')
 			img->posX += img->dirX * 0.1;
 		if(img->s[(int)(img->posX)][(int)(img->posY + img->dirY)] == '0')
 			img->posY += img->dirY * 0.1;
 	}
-	else if (keycode == 124)
+	else if (keycode == 1)
 	{
 		if(img->s[(int)(img->posX - img->dirX)][(int)(img->posY)] == '0')
 			img->posX -= img->dirX * 0.1;
 		if(img->s[(int)(img->posX)][(int)(img->posY - img->dirY)] == '0')
 			img->posY -= img->dirY * 0.1;
 	}
-	else if (keycode == 125)
+	else if (keycode == 123)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = img->dirX;
@@ -181,7 +201,7 @@ int	key_check(int keycode, t_data *img)
 		img->planeY = oldPlaneX * sin(-rotspeed) + img->planeY * cos(-rotspeed);
 		printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
 	}
-	else if (keycode == 126)
+	else if (keycode == 124)
 	 {
 		//both camera direction and camera plane must be rotated
 		double oldDirX = img->dirX;
@@ -284,30 +304,62 @@ void raycast(t_data *img)
 		if(img->drawEnd >= screenHeight)img->drawEnd = screenHeight - 1;
 		if(img->drawStart >= screenHeight)img->drawStart = 0;
 		//choose wall color
-		int color;
-		switch(img->s[mapX][mapY])
-		{
-			case '1':  color = 0x00FF0000;  break; //red
-			default: color = 0x00000000; break; //yellow
-		}
+		// int color;
+		// switch(img->s[mapX][mapY])
+		// {
+		// 	case '1':  color = 0x00FF0000;  break; //red
+		// 	default: color = 0x00000000; break; //yellow
+		// }
+		//calculate value of wallX
+		double wallX; //where exactly the wall was hit
+		if (side == 0) wallX = img->posY + perpWallDist * rayDirY;
+		else           wallX = img->posX + perpWallDist * rayDirX;
+		wallX -= floor((wallX));
 
+		//x coordinate on the texture
+		int texX = (int)(wallX * (double)(texWidth));
+		if(side == 0 && rayDirX > 0) texX = texWidth - texX - 1;
+		if(side == 1 && rayDirY < 0) texX = texWidth - texX - 1;
 		//give x and y sides different brightness
-		if (side == 1) {color = color / 2;}
+		// if (side == 1) {color = color / 2;}
 
 		//draw the pixels of the stripe as a vertical line
+		double step = 1.0 * texHeight / lineHeight;
+      // Starting texture coordinate
+      double texPos = (img->drawStart - screenHeight / 2 + lineHeight / 2) * step;
+      for(int y = 0; y < screenHeight; y++)
+      {
+		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+		if (y >= img->drawStart && y <= img->drawEnd)
+		{
+			int texY = (int)texPos & (texHeight - 1);
+			texPos += step;
+			fflush(stdout);
+			int color = img->texture[texHeight * texY + texX];
+			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+			if(side == 1) color = (color >> 1) & 8355711;
+			img->buffer[y][x] = color;
+		}
+		else if (y < img->drawStart)
+			img->buffer[y][x] = 0;
+		else if (y > img->drawEnd)
+			img->buffer[y][x] = 0;
 		
+		// printf("%d %d %d %d\n", img->texture[texHeight * texY + texX], texHeight * texY + texX, texX, texY);
+      }
 		int i = 0;
 		while (i < screenHeight)
 		{
 			if (i >= img->drawStart && i <= img->drawEnd)
-				my_mlx_pixel_put(img, x, i, color);
+			{
+				my_mlx_pixel_put(img, x, i,	img->buffer[i][x]);
+			}
 			else if (i < img->drawStart)
 				my_mlx_pixel_put(img, x, i, 0x00FFFFFF);
 			else if (i > img->drawEnd)
 				my_mlx_pixel_put(img, x, i, 0x00000000);
 			i++;
 		}
-		
 		x++;
 	}
 	printf("%u %u %d %d \n", img->drawStart, img->drawEnd, mapX, mapY);
@@ -324,11 +376,15 @@ int main(int ac, char **av)
 	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
 	img.posX = 3;
-	img.posY = 29;  //x and y start position
+	img.posY = 29;//x and y start position
 	img.dirX = -1;
 	img.dirY = 0; //initial direction vector
 	img.planeX = 0;
 	img.planeY = 0.66; //the 2d raycaster version of camera plane
+	img.texture = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall1.xpm", &img.width, &img.height);
+	// img.texture[1] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall2.xpm", &img.width, &img.height);
+	// img.texture[2] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall3.xpm", &img.width, &img.height);
+	// img.texture[3] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall4.xpm", &img.width, &img.height);
 	int j = 0;
 	while (img.s[j])
 	{
@@ -347,6 +403,7 @@ int main(int ac, char **av)
 	}
 	printf("%f %f \n", img.posX, img.posY);
 	fflush(stdout);
+	
 	raycast(&img);
 	mlx_hook(img.win, 2, 0, key_check, &img);
 	mlx_loop(img.mlx);

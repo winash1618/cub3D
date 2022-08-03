@@ -4,6 +4,8 @@ This project is inspired by the world-famous Wolfenstein 3D game, which was the 
 
 ## Resources
 - https://lodev.org/cgtutor/raycasting.html
+- https://eastmanreference.com/complete-list-of-applescript-key-codes#:~:text=The%20enter%20key%20on%20most,accomplished%20by%20hitting%20fn%20%2B%20enter
+- https://www.youtube.com/watch?v=NbSee-XM7WA
 
 ## gcc
 - gcc -framework OpenGL -framework AppKit cub3d.c minilibx/libmlx.a && ./a.out
