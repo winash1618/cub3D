@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/04 18:33:02 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:36:31 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ char **create_map(int ac, char **av)
 }
 int	key_check(int keycode, t_data *img)
 {
+	if (keycode = 53)
+		exit(1);
 	if (keycode == 2)
 	{
 		if(img->s[(int)(img->posX + img->planeX * walkspeed)][(int)(img->posY)] != '1')
