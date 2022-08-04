@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/04 17:41:13 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/04 18:33:02 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,16 @@ void raycast(t_data *img)
 			int texY = (int)texPos & (img->height[0] - 1);
 			texPos += step;
 			// fflush(stdout);
-			int color = (int)img->texture[3][(int)texHeight * texY + texX];
+			int color;
+			if (side == 0 && rayDirX > 0)
+				color = (int)img->texture[0][(int)texHeight * texY + texX];
+			else if (side == 0 && rayDirX < 0)
+				color = (int)img->texture[1][(int)texHeight * texY + texX];
+			else if (side == 1 && rayDirY > 0)
+				color = (int)img->texture[2][(int)texHeight * texY + texX];
+			else if (side == 1 && rayDirY < 0)
+				color = (int)img->texture[3][(int)texHeight * texY + texX];
+			
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 		// printf("%d %d %d %d\n", img->texture[texHeight * texY + texX], texHeight * texY + texX, texX, texY);
 			if(side == 1) color = (color >> 1) & 8355711;
