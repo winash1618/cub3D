@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/03 17:20:02 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/04 11:59:32 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #define screenWidth 1080
 #define screenHeight 960
 #define rotspeed 0.1
+#define walkspeed 0.185
 int	ft_exit(void)
 {
 	exit (1);
@@ -35,7 +36,11 @@ typedef struct	s_data
 	void	*img;
 	void	*win;
 	void	*mlx;
+	void	*ptr;
 	int		*texture;
+	int		bpp;
+	int		ll;
+	int		en;
 	char	*addr;
 	double	posX;
 	double	posY;
@@ -164,31 +169,31 @@ int	key_check(int keycode, t_data *img)
 {
 	if (keycode == 2)
 	{
-		if(img->s[(int)(img->posX + img->planeX)][(int)(img->posY)] == '0')
-			img->posX += img->planeX * 0.1;
-		if(img->s[(int)(img->posX)][(int)(img->posY + img->planeY)] == '0')
-			img->posY += img->planeY * 0.1;
+		if(img->s[(int)(img->posX + img->planeX * walkspeed)][(int)(img->posY)] != '1')
+			img->posX += img->planeX * walkspeed;
+		if(img->s[(int)(img->posX)][(int)(img->posY + img->planeY * walkspeed)] != '1')
+			img->posY += img->planeY * walkspeed;
 	}
 	else if (keycode == 0)
 	{
-		if(img->s[(int)(img->posX - img->planeX)][(int)(img->posY)] == '0')
-			img->posX -= img->planeX * 0.1;
-		if(img->s[(int)(img->posX)][(int)(img->posY - img->planeY)] == '0')
-			img->posY -= img->planeY * 0.1;
+		if(img->s[(int)(img->posX - img->planeX * walkspeed)][(int)(img->posY)] != '1')
+			img->posX -= img->planeX * walkspeed;
+		if(img->s[(int)(img->posX)][(int)(img->posY - img->planeY * walkspeed)] != '1')
+			img->posY -= img->planeY * walkspeed;
 	}
 	if (keycode == 13)
 	{
-		if(img->s[(int)(img->posX + img->dirX)][(int)(img->posY)] == '0')
-			img->posX += img->dirX * 0.1;
-		if(img->s[(int)(img->posX)][(int)(img->posY + img->dirY)] == '0')
-			img->posY += img->dirY * 0.1;
+		if(img->s[(int)(img->posX + img->dirX * walkspeed)][(int)(img->posY)] != '1')
+			img->posX += img->dirX * walkspeed;
+		if(img->s[(int)(img->posX)][(int)(img->posY + img->dirY * walkspeed)] != '1')
+			img->posY += img->dirY * walkspeed;
 	}
 	else if (keycode == 1)
 	{
-		if(img->s[(int)(img->posX - img->dirX)][(int)(img->posY)] == '0')
-			img->posX -= img->dirX * 0.1;
-		if(img->s[(int)(img->posX)][(int)(img->posY - img->dirY)] == '0')
-			img->posY -= img->dirY * 0.1;
+		if(img->s[(int)(img->posX - img->dirX * walkspeed)][(int)(img->posY)] != '1')
+			img->posX -= img->dirX * walkspeed;
+		if(img->s[(int)(img->posX)][(int)(img->posY - img->dirY * walkspeed)] != '1')
+			img->posY -= img->dirY * walkspeed;
 	}
 	else if (keycode == 123)
 	{
@@ -199,7 +204,7 @@ int	key_check(int keycode, t_data *img)
 		double oldPlaneX = img->planeX;
 		img->planeX = img->planeX * cos(-rotspeed) - img->planeY* sin(-rotspeed);
 		img->planeY = oldPlaneX * sin(-rotspeed) + img->planeY * cos(-rotspeed);
-		printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
+		// printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
 	}
 	else if (keycode == 124)
 	 {
@@ -210,7 +215,7 @@ int	key_check(int keycode, t_data *img)
 		double oldPlaneX = img->planeX;
 		img->planeX = img->planeX *cos(rotspeed)- img->planeY*sin(rotspeed);
 		img->planeY = oldPlaneX*sin(rotspeed) + img->planeY*cos(rotspeed);
-		printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
+		// printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
 	}
 	raycast(img);
 	return (0);
@@ -300,9 +305,11 @@ void raycast(t_data *img)
 		//calculate lowest and highest pixel to fill in current stripe
 		img->drawStart = -lineHeight / 2 + screenHeight / 2;
 		if(img->drawStart < 0)img->drawStart = 0;
-		img->drawEnd = lineHeight / 2 + screenHeight / 2;
-		if(img->drawEnd >= screenHeight)img->drawEnd = screenHeight - 1;
-		if(img->drawStart >= screenHeight)img->drawStart = 0;
+			img->drawEnd = lineHeight / 2 + screenHeight / 2;
+		if(img->drawEnd >= screenHeight)
+			img->drawEnd = screenHeight - 1;
+		if(img->drawStart >= screenHeight)
+			img->drawStart = 0;
 		//choose wall color
 		// int color;
 		// switch(img->s[mapX][mapY])
@@ -332,32 +339,37 @@ void raycast(t_data *img)
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		if (y >= img->drawStart && y <= img->drawEnd)
 		{
-			int texY = (int)texPos & (texHeight - 1);
+			int texY = (int)texPos & (img->height - 1);
 			texPos += step;
-			fflush(stdout);
-			int color = img->texture[texHeight * texY + texX];
+			// fflush(stdout);
+			int color = (int)img->texture[(int)texHeight * texY + texX];
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+		// printf("%d %d %d %d\n", img->texture[texHeight * texY + texX], texHeight * texY + texX, texX, texY);
 			if(side == 1) color = (color >> 1) & 8355711;
 			img->buffer[y][x] = color;
 		}
-		else if (y < img->drawStart)
-			img->buffer[y][x] = 0;
-		else if (y > img->drawEnd)
-			img->buffer[y][x] = 0;
+		// else if (y < img->drawStart)
+		// 	img->buffer[y][x] = 0x00FF0000;
+		// else if (y > img->drawEnd)
+		// 	img->buffer[y][x] = 0x00FF0000;
 		
-		// printf("%d %d %d %d\n", img->texture[texHeight * texY + texX], texHeight * texY + texX, texX, texY);
       }
 		int i = 0;
+		while (i < screenHeight)
+		{
+			if (i <  screenHeight / 2)
+				my_mlx_pixel_put(img, x, i, 0x00FF0000);
+			else if (i >  screenHeight / 2)
+				my_mlx_pixel_put(img, x, i, 0x000000FF);
+			i++;
+		}
+		i = 0;
 		while (i < screenHeight)
 		{
 			if (i >= img->drawStart && i <= img->drawEnd)
 			{
 				my_mlx_pixel_put(img, x, i,	img->buffer[i][x]);
 			}
-			else if (i < img->drawStart)
-				my_mlx_pixel_put(img, x, i, 0x00FFFFFF);
-			else if (i > img->drawEnd)
-				my_mlx_pixel_put(img, x, i, 0x00000000);
 			i++;
 		}
 		x++;
@@ -381,7 +393,8 @@ int main(int ac, char **av)
 	img.dirY = 0; //initial direction vector
 	img.planeX = 0;
 	img.planeY = 0.66; //the 2d raycaster version of camera plane
-	img.texture = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall1.xpm", &img.width, &img.height);
+	img.ptr = mlx_xpm_file_to_image(img.mlx, "./img/wood.xpm", &img.width, &img.height);
+	img.texture = (int *)mlx_get_data_addr(img.ptr,  &img.bpp, &img.ll, &img.en);
 	// img.texture[1] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall2.xpm", &img.width, &img.height);
 	// img.texture[2] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall3.xpm", &img.width, &img.height);
 	// img.texture[3] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall4.xpm", &img.width, &img.height);
