@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/04 11:59:32 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/04 17:41:13 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ typedef struct	s_data
 	void	*img;
 	void	*win;
 	void	*mlx;
-	void	*ptr;
-	int		*texture;
-	int		bpp;
-	int		ll;
-	int		en;
+	void	*ptr[4];
+	int		*texture[4];
+	int		bpp[4];
+	int		ll[4];
+	int		en[4];
 	char	*addr;
 	double	posX;
 	double	posY;
@@ -50,8 +50,8 @@ typedef struct	s_data
 	double	planeY;
 	char	**s;
 	int	buffer[screenHeight][screenWidth];
-	int width;
-	int height;
+	int width[4];
+	int height[4];
 	// double	cameraX;
 	// double	rayDirX;
 	// double	rayDirY;
@@ -339,10 +339,10 @@ void raycast(t_data *img)
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		if (y >= img->drawStart && y <= img->drawEnd)
 		{
-			int texY = (int)texPos & (img->height - 1);
+			int texY = (int)texPos & (img->height[0] - 1);
 			texPos += step;
 			// fflush(stdout);
-			int color = (int)img->texture[(int)texHeight * texY + texX];
+			int color = (int)img->texture[3][(int)texHeight * texY + texX];
 			//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 		// printf("%d %d %d %d\n", img->texture[texHeight * texY + texX], texHeight * texY + texX, texX, texY);
 			if(side == 1) color = (color >> 1) & 8355711;
@@ -393,8 +393,14 @@ int main(int ac, char **av)
 	img.dirY = 0; //initial direction vector
 	img.planeX = 0;
 	img.planeY = 0.66; //the 2d raycaster version of camera plane
-	img.ptr = mlx_xpm_file_to_image(img.mlx, "./img/wood.xpm", &img.width, &img.height);
-	img.texture = (int *)mlx_get_data_addr(img.ptr,  &img.bpp, &img.ll, &img.en);
+	img.ptr[0] = mlx_xpm_file_to_image(img.mlx, "./img/redbrick.xpm", &img.width[0], &img.height[0]);
+	img.texture[0] = (int (*))mlx_get_data_addr(img.ptr[0],  &img.bpp[0], &img.ll[0], &img.en[0]);
+	img.ptr[1] = mlx_xpm_file_to_image(img.mlx, "./img/wood.xpm", &img.width[1], &img.height[1]);
+	img.texture[1] = (int (*))mlx_get_data_addr(img.ptr[1],  &img.bpp[1], &img.ll[1], &img.en[1]);
+	img.ptr[2] = mlx_xpm_file_to_image(img.mlx, "./img/barrel.xpm", &img.width[2], &img.height[2]);
+	img.texture[2] = (int (*))mlx_get_data_addr(img.ptr[2],  &img.bpp[2], &img.ll[2], &img.en[2]);
+	img.ptr[3] = mlx_xpm_file_to_image(img.mlx, "./img/bluestone.xpm", &img.width[3], &img.height[3]);
+	img.texture[3] = (int (*))mlx_get_data_addr(img.ptr[3],  &img.bpp[3], &img.ll[3], &img.en[3]);
 	// img.texture[1] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall2.xpm", &img.width, &img.height);
 	// img.texture[2] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall3.xpm", &img.width, &img.height);
 	// img.texture[3] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall4.xpm", &img.width, &img.height);
