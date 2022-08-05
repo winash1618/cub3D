@@ -1,69 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/31 17:24:47 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/04 18:37:58 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/08/04 19:50:17 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/08/05 14:33:50 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line/get_next_line.h"
-#include "minilibx/mlx.h"
-#include <fcntl.h>
-#include <string.h>
-#include <stdio.h>
-#include <math.h>
-#include <stdbool.h>
+#include "cub3d.h"
 
-#define mapWidth 24
-#define mapHeight 24
-#define texWidth 64
-#define texHeight 64
-#define screenWidth 1080
-#define screenHeight 960
-#define rotspeed 0.1
-#define walkspeed 0.185
 int	ft_exit(void)
 {
 	exit (1);
 	return (0);
 }
-typedef struct	s_data
-{
-	void	*img;
-	void	*win;
-	void	*mlx;
-	void	*ptr[4];
-	int		*texture[4];
-	int		bpp[4];
-	int		ll[4];
-	int		en[4];
-	char	*addr;
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
-	char	**s;
-	int	buffer[screenHeight][screenWidth];
-	int width[4];
-	int height[4];
-	// double	cameraX;
-	// double	rayDirX;
-	// double	rayDirY;
-	unsigned int	drawStart;
-	unsigned int	drawEnd;
-	
-	
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-void raycast(t_data *img);
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -137,7 +91,7 @@ char **create_map(int ac, char **av)
 	if (ac == 2)
 	{
 		check_name(av[1]);
-		fd = open(ft_strjoin("./map/", av[1], 0), O_RDONLY);
+		fd = open(ft_strjoin("./map/", av[1]), O_RDONLY);
 		str = get_next_line(fd);
 		count++;
 		if (!str)
@@ -151,7 +105,7 @@ char **create_map(int ac, char **av)
 			}
 		}
 		close (fd);
-		fd = open(ft_strjoin("./map/", av[1], 0), O_RDONLY);
+		fd = open(ft_strjoin("./map/", av[1]), O_RDONLY);
 		
 		s = (char **)malloc(sizeof(char *) * (count));
 		i = 0;
@@ -388,54 +342,54 @@ void raycast(t_data *img)
 	printf("%u %u %d %d \n", img->drawStart, img->drawEnd, mapX, mapY);
 	mlx_put_image_to_window(img->mlx, img->win, img->img, 0, 0);
 }
-int main(int ac, char **av)
-{
-	t_data	img;
-	img.mlx = mlx_init();
-	if (!img.mlx)
-		exit(0);
-	img.s = create_map(ac, av);
-	img.win = mlx_new_window(img.mlx, screenWidth, screenHeight, "Hello world!");
-	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
-	img.posX = 3;
-	img.posY = 29;//x and y start position
-	img.dirX = -1;
-	img.dirY = 0; //initial direction vector
-	img.planeX = 0;
-	img.planeY = 0.66; //the 2d raycaster version of camera plane
-	img.ptr[0] = mlx_xpm_file_to_image(img.mlx, "./img/redbrick.xpm", &img.width[0], &img.height[0]);
-	img.texture[0] = (int (*))mlx_get_data_addr(img.ptr[0],  &img.bpp[0], &img.ll[0], &img.en[0]);
-	img.ptr[1] = mlx_xpm_file_to_image(img.mlx, "./img/wood.xpm", &img.width[1], &img.height[1]);
-	img.texture[1] = (int (*))mlx_get_data_addr(img.ptr[1],  &img.bpp[1], &img.ll[1], &img.en[1]);
-	img.ptr[2] = mlx_xpm_file_to_image(img.mlx, "./img/barrel.xpm", &img.width[2], &img.height[2]);
-	img.texture[2] = (int (*))mlx_get_data_addr(img.ptr[2],  &img.bpp[2], &img.ll[2], &img.en[2]);
-	img.ptr[3] = mlx_xpm_file_to_image(img.mlx, "./img/bluestone.xpm", &img.width[3], &img.height[3]);
-	img.texture[3] = (int (*))mlx_get_data_addr(img.ptr[3],  &img.bpp[3], &img.ll[3], &img.en[3]);
-	// img.texture[1] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall2.xpm", &img.width, &img.height);
-	// img.texture[2] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall3.xpm", &img.width, &img.height);
-	// img.texture[3] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall4.xpm", &img.width, &img.height);
-	int j = 0;
-	while (img.s[j])
-	{
-		int k = 0;
-		while(img.s[j][k])
-		{
-			if (img.s[j][k] == '0')
-			{
-				img.posX = j;
-				img.posY = k;
-				break;
-			}
-			k++;
-		}
-		j++;
-	}
-	printf("%f %f \n", img.posX, img.posY);
-	fflush(stdout);
+// int main(int ac, char **av)
+// {
+// 	t_data	img;
+// 	img.mlx = mlx_init();
+// 	if (!img.mlx)
+// 		exit(0);
+// 	img.s = create_map(ac, av);
+// 	img.win = mlx_new_window(img.mlx, screenWidth, screenHeight, "Hello world!");
+// 	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
+// 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
+// 	img.posX = 3;
+// 	img.posY = 29;//x and y start position
+// 	img.dirX = -1;
+// 	img.dirY = 0; //initial direction vector
+// 	img.planeX = 0;
+// 	img.planeY = 0.66; //the 2d raycaster version of camera plane
+// 	img.ptr[0] = mlx_xpm_file_to_image(img.mlx, "./img/redbrick.xpm", &img.width[0], &img.height[0]);
+// 	img.texture[0] = (int (*))mlx_get_data_addr(img.ptr[0],  &img.bpp[0], &img.ll[0], &img.en[0]);
+// 	img.ptr[1] = mlx_xpm_file_to_image(img.mlx, "./img/wood.xpm", &img.width[1], &img.height[1]);
+// 	img.texture[1] = (int (*))mlx_get_data_addr(img.ptr[1],  &img.bpp[1], &img.ll[1], &img.en[1]);
+// 	img.ptr[2] = mlx_xpm_file_to_image(img.mlx, "./img/barrel.xpm", &img.width[2], &img.height[2]);
+// 	img.texture[2] = (int (*))mlx_get_data_addr(img.ptr[2],  &img.bpp[2], &img.ll[2], &img.en[2]);
+// 	img.ptr[3] = mlx_xpm_file_to_image(img.mlx, "./img/bluestone.xpm", &img.width[3], &img.height[3]);
+// 	img.texture[3] = (int (*))mlx_get_data_addr(img.ptr[3],  &img.bpp[3], &img.ll[3], &img.en[3]);
+// 	// img.texture[1] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall2.xpm", &img.width, &img.height);
+// 	// img.texture[2] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall3.xpm", &img.width, &img.height);
+// 	// img.texture[3] = (int *)mlx_xpm_file_to_image(img.mlx, "./img/wall4.xpm", &img.width, &img.height);
+// 	int j = 0;
+// 	while (img.s[j])
+// 	{
+// 		int k = 0;
+// 		while(img.s[j][k])
+// 		{
+// 			if (img.s[j][k] == '0')
+// 			{
+// 				img.posX = j;
+// 				img.posY = k;
+// 				break;
+// 			}
+// 			k++;
+// 		}
+// 		j++;
+// 	}
+// 	printf("%f %f \n", img.posX, img.posY);
+// 	fflush(stdout);
 	
-	raycast(&img);
-	mlx_hook(img.win, 2, 0, key_check, &img);
-	mlx_loop(img.mlx);
-	return (0);
-}
+// 	raycast(&img);
+// 	mlx_hook(img.win, 2, 0, key_check, &img);
+// 	mlx_loop(img.mlx);
+// 	return (0);
+// }
