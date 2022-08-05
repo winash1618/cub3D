@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 13:22:31 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 09:48:00 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:25:44 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_reader(int fd, char *s, size_t bf)
 			return (NULL);
 		}
 		str[i] = '\0';
-		s = ft_strjoin(s, str);
+		s = ft_strjoin(s, str, 1);
 	}
 	if (s[0] == '\0')
 	{

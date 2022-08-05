@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 19:33:09 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 18:40:41 by ayassin          ###   ########.fr       */
+/*   Updated: 2022/08/05 16:26:26 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strchr(const char *s, int c)
 	int	pos;
 
 	pos = 0;
+	if (!s)
+		return (0);
 	c = (unsigned char) c;
 	while (s[pos])
 	{

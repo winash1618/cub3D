@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:05:13 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 14:42:54 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:31:43 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct	s_data
 	// double	cameraX;
 	// double	rayDirX;
 	// double	rayDirY;
-	int	drawStart;
-	int	drawEnd;
+	unsigned int	drawStart;
+	unsigned int	drawEnd;
 	
 	
 	int		bits_per_pixel;

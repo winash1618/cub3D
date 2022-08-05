@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:15:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 14:51:08 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:30:06 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ int main(int ac, char **av)
 	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
 	img.posX = 3;
-	img.posY = 29;//x and y start position
+	img.posY = 29; //x and y start position
 	img.dirX = -1;
 	img.dirY = 0; //initial direction vector
 	img.planeX = 0;
+	img.drawStart = 0;
+	img.drawEnd = 0;
 	img.planeY = 0.66; //the 2d raycaster version of camera plane
 	img.ptr[0] = mlx_xpm_file_to_image(img.mlx, "./img/redbrick.xpm", &img.width[0], &img.height[0]);
 	img.texture[0] = (int (*))mlx_get_data_addr(img.ptr[0],  &img.bpp[0], &img.ll[0], &img.en[0]);

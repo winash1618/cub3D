@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:50:17 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 14:55:26 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:18:05 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char **create_map(int ac, char **av)
 	int i;
 	if (ac == 2)
 	{
-		fd = open(ft_strjoin("./map/", av[1]), O_RDONLY);
+		fd = open(ft_strjoin("./map/", av[1], 0), O_RDONLY);
 		check_name(av[1]);
 		str = get_next_line(fd);
 		count++;
@@ -107,7 +107,7 @@ char **create_map(int ac, char **av)
 			}
 		}
 		close (fd);
-		fd = open(ft_strjoin("./map/", av[1]), O_RDONLY);
+		fd = open(ft_strjoin("./map/", av[1], 0), O_RDONLY);
 		
 		s = (char **)malloc(sizeof(char *) * (count));
 		i = 0;
