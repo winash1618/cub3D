@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:05:13 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 16:31:43 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 18:18:18 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,33 @@ typedef struct	s_data
 	int		line_length;
 	int		endian;
 }				t_data;
+
+typedef struct s_loc
+{
+	int x;
+	unsigned int y;
+	int mapX;
+	int mapY;
+	double cameraX;
+	double rayDirX;
+	double rayDirY;
+	double sideDistX;
+	double sideDistY;
+	double deltaDistX;
+	double deltaDistY;
+	double perpWallDist;
+	int lineHeight;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+	double wallX;
+	int texX;
+	int texY;
+	double step;
+	double texPos;
+	int color;
+}	t_loc;
 
 void raycast(t_data *img);
 char **create_map(int ac, char **av);
