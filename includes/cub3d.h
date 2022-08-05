@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:05:13 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 18:18:18 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 19:37:24 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ typedef struct s_loc
 void raycast(t_data *img);
 char **create_map(int ac, char **av);
 int	key_check(int keycode, t_data *img);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

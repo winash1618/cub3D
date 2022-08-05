@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 19:50:13 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/08/05 17:23:29 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/08/05 19:36:40 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBX		=	libmlx.a
 
 INC_DIR		=	includes
 
-SRCS		=	cub3d.c main.c key_event.c
+SRCS		=	cub3d.c main.c key_event.c ray_caster.c
 
 SRC_DIR		=	srcs
 
