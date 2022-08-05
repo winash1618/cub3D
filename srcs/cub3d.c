@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:50:17 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 16:18:05 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:43:21 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,7 +292,7 @@ void raycast(t_data *img)
 		double step = 1.0 * texHeight / lineHeight;
       // Starting texture coordinate
       double texPos = (img->drawStart - screenHeight / 2 + lineHeight / 2) * step;
-      for(int y = 0; y < screenHeight; y++)
+      for(unsigned int y = 0; y < screenHeight; y++)
       {
 		// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 		if (y >= img->drawStart && y <= img->drawEnd)
@@ -321,7 +321,7 @@ void raycast(t_data *img)
 		// 	img->buffer[y][x] = 0x00FF0000;
 		
       }
-		int i = 0;
+		unsigned int i = 0;
 		while (i < screenHeight)
 		{
 			if (i <  screenHeight / 2)
