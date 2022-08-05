@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/04 19:50:13 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/08/05 14:31:14 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/08/05 14:44:13 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBX		=	libmlx.a
 
 INC_DIR		=	includes
 
-SRCS		=	cub3d.c 
+SRCS		=	cub3d.c main.c
 
 SRC_DIR		=	srcs
 
@@ -30,7 +30,7 @@ OBJS		=	$(addprefix $(SRC_DIR)/, $(SRCS:%c=%o))
 
 CC			=	gcc
 
-CFLAGS		=	-g3 -Ofast 
+CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast 
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	for dir in $(SUBDIRS); do \
@@ -42,7 +42,7 @@ $(NAME): $(OBJS) $(LIBX)
 	for dir in $(SUBDIRS); do \
 		$(MAKE) all -C $$dir; \
 	done
-	$(CC) $(CFLAGS) -Lft_printf -lftprintf -Llibft -lft $(OBJS) main.c $(FRAMEWORK) -o $(NAME)
+	$(CC) $(CFLAGS) -Lft_printf -lftprintf -Llibft -lft $(OBJS) $(FRAMEWORK) -o $(NAME)
 
 $(LIBX):
 	make -C $(LIBX_DIR)

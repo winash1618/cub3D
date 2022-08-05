@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:50:17 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 14:33:50 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:55:26 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,18 @@ void check_name(char *str)
 char **create_map(int ac, char **av)
 {
 	int fd;
-	int line_num;
+	// int line_num;
+	fd = 0;
 	char *str;
 	int count = 0;
 	char **s;
+	s = NULL;
 	str = NULL;
 	int i;
 	if (ac == 2)
 	{
-		check_name(av[1]);
 		fd = open(ft_strjoin("./map/", av[1]), O_RDONLY);
+		check_name(av[1]);
 		str = get_next_line(fd);
 		count++;
 		if (!str)

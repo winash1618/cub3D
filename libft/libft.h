@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 19:31:52 by ayassin           #+#    #+#             */
-/*   Updated: 2022/08/05 09:48:33 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:47:53 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1
 
 /* Linked List for bounus. Has pointer to content and pointer to next node*/
 typedef struct s_list

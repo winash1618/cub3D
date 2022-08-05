@@ -6,11 +6,11 @@
 /*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 14:15:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 14:31:40 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:51:08 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d.h"
+#include "cub3d.h"
 
 int main(int ac, char **av)
 {
