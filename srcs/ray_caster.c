@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 17:26:01 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 19:35:00 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/08/06 12:11:53 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 
-void init_local(t_loc *loc, int x, int mapX, int mapY)
+/*
+void init_loc
+*/
+void	init_local(t_loc *loc, int x, int mapX, int mapY)
 {
 	loc->x = x;
 	loc->y = 0;

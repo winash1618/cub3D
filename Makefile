@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+         #
+#    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/04 19:50:13 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/08/05 19:36:40 by mkaruvan         ###   ########.fr        #
+#    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
+#    Updated: 2022/08/06 12:07:00 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJS		=	$(addprefix $(SRC_DIR)/, $(SRCS:%c=%o))
 
 CC			=	gcc
 
-CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast 
+CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	for dir in $(SUBDIRS); do \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/05 14:15:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/05 17:10:30 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/08/06 12:11:41 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int ac, char **av)
 		int k = 0;
 		while(img.s[j][k])
 		{
-			if (img.s[j][k] == '0')
+			if (img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E' || img.s[j][k] == 'W')
 			{
 				img.posX = j;
 				img.posY = k;
