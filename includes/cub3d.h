@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/06 12:13:49 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/03 10:28:47 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,40 @@
 # define screenHeight 960
 # define rotspeed 0.1
 # define walkspeed 0.185
+
+enum	e_info_type
+{
+	WE, EA, SO, NO, F, C
+};
+
+/*----------------------------*/
+typedef struct s_info
+{
+	// t_info *prev;
+	char *data; // path_to_the_west_texture
+	// we need to check if the path is valid, else exit
+	enum e_info_type type; // WE
+	// for F and C, we need to check if the data is valid, else exit
+	// check commas, split (,), check if num, check num  0 < 255.
+	t_info *next; // not more than 6
+} t_info;
+
+typedef struct s_map
+{
+	t_map *prev;
+	char *data; // 1, 0, [N, S, E, W] (only one of them should survive)
+	// no new line after a line
+	// 
+	// each line should begin and end with 1
+	t_map *next;
+} t_map;
+
+typedef struct s_parse
+{
+	t_info	*info;
+	t_map	*map;
+} t_parse;
+/*----------------------------*/
 
 typedef struct	s_data
 {
