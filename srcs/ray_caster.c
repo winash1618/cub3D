@@ -6,11 +6,11 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/06 12:11:53 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/06 12:58:05 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "cub3d.h"
 /*
 void init_loc
 */

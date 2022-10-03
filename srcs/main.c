@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/06 12:11:41 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/08/07 10:12:17 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int main(int ac, char **av)
 		int k = 0;
 		while(img.s[j][k])
 		{
-			if (img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E' || img.s[j][k] == 'W')
+			if (img.s[j][k] == '0')
 			{
 				img.posX = j;
 				img.posY = k;
