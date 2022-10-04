@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/03 10:28:47 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:59:21 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
-# include "../minilibx/mlx.h"
+// # include "../minilibx/mlx.h"
 # include <fcntl.h>
 # include <string.h>
 # include <stdio.h>
@@ -39,23 +39,23 @@ enum	e_info_type
 /*----------------------------*/
 typedef struct s_info
 {
-	// t_info *prev;
+	struct s_info *prev;
 	char *data; // path_to_the_west_texture
 	// we need to check if the path is valid, else exit
 	enum e_info_type type; // WE
 	// for F and C, we need to check if the data is valid, else exit
 	// check commas, split (,), check if num, check num  0 < 255.
-	t_info *next; // not more than 6
+	struct s_info *next; // not more than 6
 } t_info;
 
 typedef struct s_map
 {
-	t_map *prev;
+	struct s_map *prev;
 	char *data; // 1, 0, [N, S, E, W] (only one of them should survive)
 	// no new line after a line
-	// 
+	// each 0 should not have a space around it
 	// each line should begin and end with 1
-	t_map *next;
+	struct s_map *next;
 } t_map;
 
 typedef struct s_parse
@@ -125,6 +125,9 @@ typedef struct s_loc
 	int color;
 }	t_loc;
 
+/*-----------------------------------------------*/
+void	ft_parsing(int ac, char **av);
+/*-----------------------------------------------*/
 void raycast(t_data *img);
 char **create_map(int ac, char **av);
 int	key_check(int keycode, t_data *img);
