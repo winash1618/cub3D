@@ -6,7 +6,7 @@
 #    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/04 11:45:36 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/06 11:36:46 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS		=	cub3d.c main.c key_event.c ray_caster.c
 
 SRC_DIR		=	srcs
 
-PARSER		=	ft_parsing.c
+PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_set_info.c ft_set_map.c
 
 PARSER_DIR	=	parsing
 	

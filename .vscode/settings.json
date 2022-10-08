@@ -1,7 +1,8 @@
 {
   "files.associations": {
-    "cub3d.h": "c"
-  },
+	"cub3d.h": "c",
+	"sstream": "c"
+},
   "42header.username": "mkaruvan",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

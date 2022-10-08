@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/04 09:59:21 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/06 23:50:34 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@
 # define rotspeed 0.1
 # define walkspeed 0.185
 
-enum	e_info_type
+enum	e_type
 {
-	WE, EA, SO, NO, F, C
+	NO, SO, WE, EA, F, C
 };
 
-/*----------------------------*/
+/*------------------------------------------------*/
 typedef struct s_info
 {
 	struct s_info *prev;
 	char *data; // path_to_the_west_texture
 	// we need to check if the path is valid, else exit
-	enum e_info_type type; // WE
+	enum e_type type; // WE
 	// for F and C, we need to check if the data is valid, else exit
 	// check commas, split (,), check if num, check num  0 < 255.
 	struct s_info *next; // not more than 6
@@ -63,7 +63,26 @@ typedef struct s_parse
 	t_info	*info;
 	t_map	*map;
 } t_parse;
-/*----------------------------*/
+/*------------------FT_INFO------------------*/
+t_info	*ft_info_new(char *data, enum e_type type);
+void	ft_info_add_back(t_info **lst, t_info *new);
+void	ft_info_add_front(t_info **lst, t_info *new);
+void	ft_info_clear(t_info **lst);
+void	ft_print_info(t_info *lst);
+/*-------------------------------------------*/
+/*------------------FT_MAP-------------------*/
+t_map	*ft_map_new(char *data);
+void	ft_map_add_back(t_map **lst, t_map *new);
+void	ft_map_add_front(t_map **lst, t_map *new);
+void	ft_map_clear(t_map **lst);
+/*-------------------------------------------*/
+/*----------------FT_SET_INFO----------------*/
+t_info	*ft_set_info(int fd, int *err);
+/*-------------------------------------------*/
+/*----------------FT_SET_MAP-----------------*/
+t_map	*ft_set_map(int fd, int *err);
+/*-------------------------------------------*/
+/*-----------------------------------------------*/
 
 typedef struct	s_data
 {
