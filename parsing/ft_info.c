@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:14:55 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/06 23:50:08 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/08 11:27:33 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_info	*ft_info_new(char *data, enum e_type type)
 	new = (t_info *)malloc(sizeof(t_info));
 	if (new == NULL)
 		return (NULL);
-	new->data = data;
+	new->data = ft_strdup(data);
 	new->type = type;
 	new->prev = NULL;
 	new->next = NULL;

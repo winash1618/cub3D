@@ -6,11 +6,22 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 07:29:21 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/06 14:53:57 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/08 12:29:56 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*----------------------------------------------------*/
+void	ft_parse_clear(t_parse **parse)
+{
+	if ((*parse)->map)
+		ft_map_clear(&(*parse)->map);
+	if ((*parse)->info)
+		ft_info_clear(&(*parse)->info);
+	// free(parse);
+}
+/*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
 void	ft_parsing(int ac, char **av)
@@ -29,6 +40,9 @@ void	ft_parsing(int ac, char **av)
 		printf("Error: Malloc failed\n");
 	parse->info = ft_set_info(fd, &err);
 	parse->map = ft_set_map(fd, &err);
+	ft_parse_clear(&parse); // TODO: free parse
+	free(parse);
+	close(fd);
 	if (err)
 		printf("Error: %d Invalid file\n", err);
 }

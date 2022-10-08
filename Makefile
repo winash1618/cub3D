@@ -6,7 +6,7 @@
 #    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/06 11:36:46 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/08 14:38:15 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,6 @@ CC			=	gcc
 CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
-	for dir in $(SUBDIRS); do \
-		$(MAKE) all -C $$dir; \
-	done
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@
 $(PARSER_DIR)/%.o : $(PARSER_DIR)/%.c
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@

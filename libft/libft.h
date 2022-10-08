@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 19:31:52 by ayassin           #+#    #+#             */
-/*   Updated: 2022/08/05 16:19:46 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/08 15:56:05 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t dstsize);
 int		ft_strlen(const char *s);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strrchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 char	*ft_itoa(int n);
