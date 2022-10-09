@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/06 23:50:34 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/09 09:33:38 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ void	ft_map_clear(t_map **lst);
 /*-------------------------------------------*/
 /*----------------FT_SET_INFO----------------*/
 t_info	*ft_set_info(int fd, int *err);
+void	ft_handle_info(char *line, t_info **info, int *err);
+void	ft_free_tab(char **tab);
+int		ft_check_info(char *line);
+int		ft_type(char *str);
+int		ft_is_map(char *line, int *err);
+int		ft_valid_line(char *line, int i, int *err);
+int		ft_tablen(char **tab);
+int		ft_spaces(char *line);
 /*-------------------------------------------*/
 /*----------------FT_SET_MAP-----------------*/
 t_map	*ft_set_map(int fd, int *err);
