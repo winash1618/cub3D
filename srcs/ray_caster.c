@@ -6,11 +6,11 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/06 12:11:53 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:48:41 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "cub3d.h"
 /*
 void init_loc
 */
@@ -110,7 +110,7 @@ void raycast_help3(t_data *img, t_loc *loc)
 
 void raycast_help4(t_data *img, t_loc *loc)
 {
-	//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
+		// Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)
 		if(loc->side == 0)
 			loc->perpWallDist = (loc->sideDistX - loc->deltaDistX);
 		else
@@ -120,7 +120,7 @@ void raycast_help4(t_data *img, t_loc *loc)
 
 		//calculate lowest and highest pixel to fill in current stripe
 		img->drawStart = -loc->lineHeight / 2 + screenHeight / 2;
-		if(img->drawStart < 0)img->drawStart = 0;
+		// if(img->drawStart < 0)img->drawStart = 0;
 			img->drawEnd = loc->lineHeight / 2 + screenHeight / 2;
 		if(img->drawEnd >= screenHeight)
 			img->drawEnd = screenHeight - 1;
@@ -193,7 +193,7 @@ void raycast_help6(t_data *img, t_loc *loc)
 	{
 		if (i >= img->drawStart && i <= img->drawEnd)
 		{
-			my_mlx_pixel_put(img, loc->x, i,	img->buffer[i][loc->x]);
+			my_mlx_pixel_put(img, loc->x, i, img->buffer[i][loc->x]);
 		}
 		i++;
 	}

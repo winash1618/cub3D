@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:21:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/06 12:11:23 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:03:13 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void key_check_updown(int keycode, t_data *img)
 		if(img->s[(int)(img->posX)][(int)(img->posY + img->planeY * walkspeed)] != '1')
 			img->posY += img->planeY * walkspeed;
 	}
-	else if (keycode == 0)
+	if (keycode == 0)
 	{
 		if(img->s[(int)(img->posX - img->planeX * walkspeed)][(int)(img->posY)] != '1')
 			img->posX -= img->planeX * walkspeed;
@@ -38,8 +38,9 @@ void key_check_rightleft(int keycode, t_data *img)
 			img->posX += img->dirX * walkspeed;
 		if(img->s[(int)(img->posX)][(int)(img->posY + img->dirY * walkspeed)] != '1')
 			img->posY += img->dirY * walkspeed;
+		
 	}
-	else if (keycode == 1)
+	if (keycode == 1)
 	{
 		if(img->s[(int)(img->posX - img->dirX * walkspeed)][(int)(img->posY)] != '1')
 			img->posX -= img->dirX * walkspeed;
@@ -59,9 +60,10 @@ void key_check_rotate(int keycode, t_data *img)
 		double oldPlaneX = img->planeX;
 		img->planeX = img->planeX * cos(-rotspeed) - img->planeY* sin(-rotspeed);
 		img->planeY = oldPlaneX * sin(-rotspeed) + img->planeY * cos(-rotspeed);
-		// printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
+		printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
+		fflush(stdout);
 	}
-	else if (keycode == 124)
+	if (keycode == 124)
 	{
 		//both camera direction and camera plane must be rotated
 		double oldDirX = img->dirX;
@@ -70,7 +72,8 @@ void key_check_rotate(int keycode, t_data *img)
 		double oldPlaneX = img->planeX;
 		img->planeX = img->planeX *cos(rotspeed)- img->planeY*sin(rotspeed);
 		img->planeY = oldPlaneX*sin(rotspeed) + img->planeY*cos(rotspeed);
-		// printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
+		printf("%f %f %f %f \n", img->dirX, img->dirY, img->planeX, img->planeY);
+		fflush(stdout);
 	}
 }
 

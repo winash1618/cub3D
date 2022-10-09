@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/08/06 12:07:00 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/09 07:35:49 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,18 +36,16 @@ $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	for dir in $(SUBDIRS); do \
 		$(MAKE) all -C $$dir; \
 	done
-	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@
+	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I$(INC_DIR) -c $^ -o $@
 
 $(NAME): $(OBJS) $(LIBX)
-	for dir in $(SUBDIRS); do \
-		$(MAKE) all -C $$dir; \
-	done
-	$(CC) $(CFLAGS) -Lft_printf -lftprintf -Llibft -lft $(OBJS) $(FRAMEWORK) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS)  -Lft_printf -lftprintf -Llibft -lft $(FRAMEWORK) -o $(NAME)
 
 $(LIBX):
 	make -C $(LIBX_DIR)
-
+	
 all: $(NAME)
+	
 
 clean:
 	for dir in $(SUBDIRS); do \

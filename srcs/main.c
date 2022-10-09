@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/08/06 12:11:41 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/09 17:09:55 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,60 @@ int main(int ac, char **av)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
 	img.posX = 3;
 	img.posY = 29; //x and y start position
-	img.dirX = -1;
-	img.dirY = 0; //initial direction vector
-	img.planeX = 0;
+	img.dirX = 0;
+	img.dirY = -1; //initial direction vector
+	img.planeX = -0.66;
 	img.drawStart = 0;
 	img.drawEnd = 0;
-	img.planeY = 0.66; //the 2d raycaster version of camera plane
-	image_putter(&img);
+	img.planeY = 0; //the 2d raycaster version of camera plane
 	int j = 0;
+	int k = 0;
 	while (img.s[j])
 	{
-		int k = 0;
+		k = 0;
 		while(img.s[j][k])
 		{
-			if (img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E' || img.s[j][k] == 'W')
+			if (img.s[j][k] == 'P' || img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E')
 			{
 				img.posX = j;
 				img.posY = k;
+				if (img.s[j][k] == 'N')
+				{
+					img.dirX = -1;
+					img.dirY = 0;
+					img.planeX = 0;
+					img.planeY = 0.66;
+				}
+				else if (img.s[j][k] == 'P')
+				{
+					img.dirX = 0;
+					img.dirY = -1;
+					img.planeX = -0.66;
+					img.planeY = 0;
+				}
+				else if (img.s[j][k] == 'E')
+				{
+					img.dirX = 0;
+					img.dirY = 1;
+					img.planeX = -0.66;
+					img.planeY = 0;
+				}
+				else
+				{
+					img.dirX = 1;
+					img.dirY = 0;
+					img.planeX = 0;
+					img.planeY = 0.66;
+				}
 				break;
 			}
 			k++;
 		}
 		j++;
 	}
+	
+	image_putter(&img);
+	
 	printf("%f %f \n", img.posX, img.posY);
 	fflush(stdout);
 	
