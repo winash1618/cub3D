@@ -1,0 +1,4 @@
+if (err == 1)
+	printf("Error: Invalid file)
+else if (err == 2)
+	printf("Error: Invalid file format)

@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 07:29:21 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/08 12:29:56 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/10 10:43:11 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_parsing(int ac, char **av)
 	int		err;
 
 	err = 0;
+	/*---------------------------------------*/
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		printf("Error: Invalid file\n");
@@ -39,10 +40,15 @@ void	ft_parsing(int ac, char **av)
 	if (parse == NULL)
 		printf("Error: Malloc failed\n");
 	parse->info = ft_set_info(fd, &err);
+	close(fd);
+	/*---------------------------------------*/
+	/*---------------------------------------*/
+	fd = open(av[1], O_RDONLY);
 	parse->map = ft_set_map(fd, &err);
+	close(fd);
+	/*---------------------------------------*/
 	ft_parse_clear(&parse); // TODO: free parse
 	free(parse);
-	close(fd);
 	if (err)
 		printf("Error: %d Invalid file\n", err);
 }
