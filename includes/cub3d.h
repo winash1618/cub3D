@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 15:53:05 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 19:12:29 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 # include "../libft/libft.h"
 # include "../ft_printf/ft_printf.h"
-// # include "../minilibx/mlx.h"
+# include "../minilibx/mlx.h"
 # include <fcntl.h>
 # include <string.h>
 # include <stdio.h>
@@ -69,6 +69,7 @@ void	ft_info_add_back(t_info **lst, t_info *new);
 void	ft_info_add_front(t_info **lst, t_info *new);
 void	ft_info_clear(t_info **lst);
 void	ft_print_info(t_info *lst);
+void	ft_free_tab(char **tab);
 /*-------------------------------------------*/
 /*------------------FT_MAP-------------------*/
 t_map	*ft_map_new(char *data);
@@ -158,7 +159,7 @@ int	ft_parsing(int ac, char **av, t_parse **parse);
 void	ft_parse_clear(t_parse **parse);
 /*-----------------------------------------------*/
 void raycast(t_data *img);
-char **create_map(int ac, char **av);
+char ***create_map(t_parse *data);
 int	key_check(int keycode, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 

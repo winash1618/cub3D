@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 07:29:21 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 16:47:04 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 17:37:22 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	ft_parsing(int ac, char **av, t_parse **parse)
 	int		err;
 
 	err = 0;
+	
+
+	
 	/*---------------------------------------*/
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)

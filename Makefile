@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
+#    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/08 14:38:15 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/15 17:28:48 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_set_info.c ft_set_map.c
 
 PARSER_DIR	=	parsing
 	
-#FRAMEWORK	=	-L $(LIBX_DIR) -lmlx -framework OpenGL -framework AppKit
+FRAMEWORK	=	-L $(LIBX_DIR) -lmlx -framework OpenGL -framework AppKit
 
-SUBDIRS		=	libft ft_printf
+SUBDIRS		=	libft ft_printf minilibx
 
 OBJS		=	$(addprefix $(SRC_DIR)/, $(SRCS:%c=%o))
 
@@ -43,7 +43,7 @@ $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 $(PARSER_DIR)/%.o : $(PARSER_DIR)/%.c
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@
 
-$(NAME): $(OBJS)  $(LIBX)
+$(NAME): $(OBJS)
 	 for dir in $(SUBDIRS); do \
 		$(MAKE) all -C $$dir; \
 	done
@@ -51,6 +51,7 @@ $(NAME): $(OBJS)  $(LIBX)
 
 $(LIBX):
 	make -C $(LIBX_DIR)
+
 all: $(NAME)
 	
 
@@ -63,9 +64,8 @@ clean:
 	rm -f $(PARSER_DIR)/*.o
 
 fclean: clean
-	for dir in $(SUBDIRS); do \
-		$(MAKE) fclean -C $$dir; \
-	done
+	make fclean -C  libft
+	make fclean -C ft_printf
 	rm -f $(NAME)
 
 re : fclean all
