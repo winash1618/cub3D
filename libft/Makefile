@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkaruvan <mkaruvan@student.42.fr>          +#+  +:+       +#+         #
+#    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 18:41:50 by ayassin           #+#    #+#              #
-#    Updated: 2022/08/05 09:46:04 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/08 15:56:24 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	  ft_strlen.c ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c ft_itoa.c\
 	  ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c\
 	  ft_striteri.c ft_strjoin.c ft_strlen.c ft_strmapi.c ft_strtrim.c\
-	  ft_substr.c get_next_line.c
+	  ft_substr.c get_next_line.c ft_strcmp.c
 
 BONUS = ft_lstadd_front.c ft_lstadd_back.c ft_lstclear.c ft_lstclear.c\
 		ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c\
@@ -32,7 +32,7 @@ OBJS = $(SRC:.c=.o)
 
 BNSOBJS = $(BONUS:.c=.o)
 
-all: $(NAME) bonus
+all: $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
