@@ -6,11 +6,10 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/04 09:59:57 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/09 18:59:32 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 /*
 void init_loc
 */
@@ -107,7 +106,6 @@ void init_loc
 // 				loc->hit = 1;
 // 	} 
 // }
-
 // void raycast_help4(t_data *img, t_loc *loc)
 // {
 // 	//Calculate distance projected on camera direction (Euclidean distance would give fisheye effect!)

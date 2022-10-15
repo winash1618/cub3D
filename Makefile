@@ -43,16 +43,16 @@ $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 $(PARSER_DIR)/%.o : $(PARSER_DIR)/%.c
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS)  $(LIBX)
 	 for dir in $(SUBDIRS); do \
 		$(MAKE) all -C $$dir; \
 	done
-	 $(CC) $(CFLAGS)  $(OBJS) -Lft_printf -lftprintf -Llibft -lft -o $(NAME)
+		$(CC) $(CFLAGS) $(OBJS)  -Lft_printf -lftprintf -Llibft -lft $(FRAMEWORK) -o $(NAME)
 
-# $(LIBX):
-# 	make -C $(LIBX_DIR)
-
+$(LIBX):
+	make -C $(LIBX_DIR)
 all: $(NAME)
+	
 
 clean:
 	for dir in $(SUBDIRS); do \
