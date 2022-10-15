@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/04 09:46:49 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:46:50 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,15 @@
 
 int main(int ac, char **av)
 {
-	ft_parsing(ac, av);
+	// int		err;
+	t_parse	*parse;
+
+	// err = 0;
+	parse = NULL;
+	ft_parsing(ac, av, &parse);
+	ft_parse_clear(&parse);
+	
+
 	/*----------------------------------------------------------------*/
 	// t_data	img;
 	// img.mlx = mlx_init();

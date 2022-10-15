@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/10 10:44:22 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:53:05 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_map	*ft_map_new(char *data);
 void	ft_map_add_back(t_map **lst, t_map *new);
 void	ft_map_add_front(t_map **lst, t_map *new);
 void	ft_map_clear(t_map **lst);
+void	ft_print_map(t_map *lst);
 /*-------------------------------------------*/
 /*----------------FT_SET_INFO----------------*/
 t_info	*ft_set_info(int fd, int *err);
@@ -153,7 +154,8 @@ typedef struct s_loc
 }	t_loc;
 
 /*-----------------------------------------------*/
-void	ft_parsing(int ac, char **av);
+int	ft_parsing(int ac, char **av, t_parse **parse);
+void	ft_parse_clear(t_parse **parse);
 /*-----------------------------------------------*/
 void raycast(t_data *img);
 char **create_map(int ac, char **av);

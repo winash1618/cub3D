@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:23:17 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/11 22:02:35 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 12:56:55 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_map	*ft_map_new(char *data)
 	new = (t_map *)malloc(sizeof(t_map));
 	if (new == NULL)
 		return (NULL);
-	new->data = data;
+	new->data = ft_strdup(data);
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);

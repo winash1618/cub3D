@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 10:39:25 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/11 21:59:22 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:31:53 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ int	ft_valid_line(char *line, int i, int *err)
 			i++;
 		else
 		{
-			printf("char: [%c], {%d}\n", line[i], i);
 			*err = 1;
 			return (0);
 		}
@@ -301,7 +300,7 @@ t_info	*ft_set_info(int fd, int *err)
 		free(line);
 		// line = NULL;
 	}
-	// ft_print_info(info);
+	ft_print_info(info);
 	return(info);
 }
 /*----------------------------------------------------*/
