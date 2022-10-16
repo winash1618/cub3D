@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 20:52:01 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/16 07:56:14 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,5 +164,5 @@ void raycast(t_data *img);
 char ***create_map(t_parse *data);
 int	key_check(int keycode, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
+int	ft_exit(void);
 #endif
