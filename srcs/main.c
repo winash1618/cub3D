@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/16 06:57:02 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/16 07:43:38 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,111 +54,116 @@ void	image_putter(t_data *img)
 			&img->ll[3], &img->en[3]);
 }
 
-int main(int ac, char **av)
+void	ft_set_player_dir(t_data *img, int j, int k)
 {
-	// int		err;
-	t_parse	*parse;
-	t_data	img;
+	if (img->s[j][k] == 'S')
+	{
+		img->dirX = -1;
+		img->dirY = 0;
+		img->planeX = 0;
+		img->planeY = 0.66;
+	}
+	else if (img->s[j][k] == 'E')
+	{
+		img->dirX = 0;
+		img->dirY = -1;
+		img->planeX = -0.66;
+		img->planeY = 0;
+	}
+	else if (img->s[j][k] == 'W')
+	{
+		img->dirX = 0;
+		img->dirY = 1;
+		img->planeX = -0.66;
+		img->planeY = 0;
+	}
+	else
+	{
+		img->dirX = 1;
+		img->dirY = 0;
+		img->planeX = 0;
+		img->planeY = 0.66;
+	}
+}
+
+void	ft_put_player(t_data *img)
+{
 	int j = 0;
 	int k = 0;
-
-	// err = 0;
-	parse = NULL;
-	ft_parsing(ac, av, &parse);
-
-	char ***p;
-	p = create_map(parse);
-	img.s = p[1];
-	img.i = p[0];
-	while(img.i[j])
-	{
-		printf("%s\n", img.i[SO]);
-		fflush(stdout);
-		j++;
-	}
-	j = 0;
-	img.floor_color = create_color(img.i[F]);
-	img.ceiling_color = create_color(img.i[C]);
-	img.mlx = mlx_init();
-	if (!img.mlx)
-		exit(0);
 	
-
-	
-	// ft_parse_clear(&parse);
-	img.win = mlx_new_window(img.mlx, screenWidth, screenHeight, "Hello world!");
-	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
-	img.posX = 3;
-	img.posY = 29; //x and y start position
-	img.dirX = 0;
-	img.dirY = -1; //initial direction vector
-	img.planeX = -0.66;
-	img.drawStart = 0;
-	img.drawEnd = 0;
-	img.planeY = 0; //the 2d raycaster version of camera plane
-	// while(img.s[j])
-	// {
-	// 	printf("%s", img.s[j]);
-	// 	fflush(stdout);
-	// 	j++;
-	// }
-	j = 0;
-	
-	while (img.s[j])
+	while (img->s[j])
 	{
 		k = 0;
-		while(img.s[j][k])
+		while(img->s[j][k])
 		{
-			if (img.s[j][k] == 'W' || img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E')
+			if (img->s[j][k] == 'W' || img->s[j][k] == 'N' || img->s[j][k] == 'S' || img->s[j][k] == 'E')
 			{
-				img.posX = j;
-				img.posY = k;
-				if (img.s[j][k] == 'S')
-				{
-					img.dirX = -1;
-					img.dirY = 0;
-					img.planeX = 0;
-					img.planeY = 0.66;
-				}
-				else if (img.s[j][k] == 'E')
-				{
-					img.dirX = 0;
-					img.dirY = -1;
-					img.planeX = -0.66;
-					img.planeY = 0;
-				}
-				else if (img.s[j][k] == 'W')
-				{
-					img.dirX = 0;
-					img.dirY = 1;
-					img.planeX = -0.66;
-					img.planeY = 0;
-				}
-				else
-				{
-					img.dirX = 1;
-					img.dirY = 0;
-					img.planeX = 0;
-					img.planeY = 0.66;
-				}
+				img->posX = j;
+				img->posY = k;
+				ft_set_player_dir(img, j, k);
 				break;
 			}
-			// printf("hi0 ");
 			k++;
 		}
 		j++;
 	}
-	
+}
+
+void	ft_init_player(t_data *img)
+{
+	img->posX = 3;
+	img->posY = 29; //x and y start position
+	img->dirX = 0;
+	img->dirY = -1; //initial direction vector
+	img->planeX = -0.66;
+	img->drawStart = 0;
+	img->drawEnd = 0;
+	img->planeY = 0; //the 2d raycaster version of camera plane
+}
+
+void ft_map_organize(t_data *img, t_parse *parse)
+{
+	char ***p;
+
+	p = create_map(parse);
+	ft_parse_clear(&parse);
+	img->i = p[0];
+	img->s = p[1];
+	img->floor_color = create_color(img->i[F]);
+	img->ceiling_color = create_color(img->i[C]);
+	free(p);
+}
+
+void	ft_error(int err)
+{
+	(void)err;
+	exit(1);
+}
+
+int main(int ac, char **av)
+{
+	int		err;
+	t_parse	*parse;
+	t_data	img;
+
+	err = 0;
+	parse = NULL;
+	err = ft_parsing(ac, av, &parse);
+	if (err)
+		ft_error(err);
+	ft_map_organize(&img, parse);
+	ft_init_player(&img);
+	ft_put_player(&img);
+	img.mlx = mlx_init();
+	if (!img.mlx)
+		exit(0);
+	img.win = mlx_new_window(img.mlx, screenWidth, screenHeight, "cub3D");
+	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,&img.endian);
 	image_putter(&img);
-	
-	// printf("%f %f \n", img.posX, img.posY);
 	fflush(stdout);
-	
 	raycast(&img);
 	mlx_hook(img.win, 2, 0, key_check, &img);
 	mlx_loop(img.mlx);
-	
-	/*----------------------------------------------------------------*/
 	return (0);
 }
