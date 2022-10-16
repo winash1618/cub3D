@@ -2,13 +2,13 @@
 
 
 
-EA          ./path_to_the_east_texture
-NO          ./path_to_the_north_texture
-SO             ./path_to_the_south_texture
+EA          ./img/barrel.xpm
+NO          ./img/bluestone.xpm
+SO             ./img/redbrick.xpm
 
 
 
-WE ./path_to_the_west_texture
+WE ./img/wood.xpm
 
 
 

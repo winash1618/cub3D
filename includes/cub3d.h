@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 19:12:29 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/15 20:52:01 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int		ft_is_map(char *line, int *err);
 int		ft_valid_line(char *line, int i, int *err);
 int		ft_tablen(char **tab);
 int		ft_spaces(char *line);
+
 /*-------------------------------------------*/
 /*----------------FT_SET_MAP-----------------*/
 t_map	*ft_set_map(int fd, int *err);
@@ -112,6 +113,7 @@ typedef struct	s_data
 	double	planeX;
 	double	planeY;
 	char	**s;
+	char	**i;
 	int	buffer[screenHeight][screenWidth];
 	int width[4];
 	int height[4];
@@ -120,8 +122,8 @@ typedef struct	s_data
 	// double	rayDirY;
 	unsigned int	drawStart;
 	unsigned int	drawEnd;
-	
-	
+	int 	floor_color;
+	int		ceiling_color;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;

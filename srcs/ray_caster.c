@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 17:22:38 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/16 06:52:56 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,9 +184,9 @@ void raycast_help6(t_data *img, t_loc *loc)
 	while (i < screenHeight)
 	{
 		if (i <  screenHeight / 2)
-			my_mlx_pixel_put(img, loc->x, i, 0x00FF0000);
+			my_mlx_pixel_put(img, loc->x, i, img->floor_color);
 		else if (i >  screenHeight / 2)
-			my_mlx_pixel_put(img, loc->x, i, 0x000000FF);
+			my_mlx_pixel_put(img, loc->x, i, img->ceiling_color);
 		i++;
 	}
 	i = 0;

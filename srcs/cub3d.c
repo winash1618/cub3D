@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:36 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 19:14:03 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/16 06:51:32 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ char **ft_tab_info(t_info *info)
 		return (NULL);
 	while (i < len_info)
 	{
-		tab[i] = ft_strdup(tmp->data);
+		tab[tmp->type] = ft_strdup(tmp->data);
 		tmp = tmp->next;
 		i++;
 	}

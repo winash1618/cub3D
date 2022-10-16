@@ -6,32 +6,53 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 19:01:40 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/16 06:57:02 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	image_putter(t_data *img)
+
+int	create_trgb(int t, int r, int g, int b)
 {
-	img->ptr[0] = mlx_xpm_file_to_image(img->mlx, "./img/redbrick.xpm",
-			&img->width[0], &img->height[0]);
-	img->texture[0] = (int (*))mlx_get_data_addr(img->ptr[0],
-			&img->bpp[0], &img->ll[0], &img->en[0]);
-	img->ptr[1] = mlx_xpm_file_to_image(img->mlx, "./img/wood.xpm",
-			&img->width[1], &img->height[1]);
-	img->texture[1] = (int (*))mlx_get_data_addr(img->ptr[1],
-			&img->bpp[1], &img->ll[1], &img->en[1]);
-	img->ptr[2] = mlx_xpm_file_to_image(img->mlx, "./img/barrel.xpm",
-			&img->width[2], &img->height[2]);
-	img->texture[2] = (int (*))mlx_get_data_addr(img->ptr[2],
-			&img->bpp[2], &img->ll[2], &img->en[2]);
-	img->ptr[3] = mlx_xpm_file_to_image(img->mlx, "./img/bluestone.xpm",
-			&img->width[3], &img->height[3]);
-	img->texture[3] = (int (*))mlx_get_data_addr(img->ptr[3], &img->bpp[3],
-			&img->ll[3], &img->en[3]);
+	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+int create_color(char *str)
+{
+	char **s = ft_split(str, ',');
+	int a[3];
+	int i = 0;
+	while (s[i])
+	{
+		a[i] = ft_atoi(s[i]);
+		free(s[i]);
+		i++;
+	}
+	free (s);
+	return create_trgb(0, a[0], a[1], a[2]);
+}
+
+
+void	image_putter(t_data *img)
+{
+	img->ptr[NO] = mlx_xpm_file_to_image(img->mlx, img->i[NO],
+			&img->width[0], &img->height[0]);
+	img->texture[NO] = (int (*))mlx_get_data_addr(img->ptr[NO],
+			&img->bpp[0], &img->ll[0], &img->en[0]);
+	img->ptr[SO] = mlx_xpm_file_to_image(img->mlx, img->i[SO],
+			&img->width[1], &img->height[1]);
+	img->texture[SO] = (int (*))mlx_get_data_addr(img->ptr[SO],
+			&img->bpp[1], &img->ll[1], &img->en[1]);
+	img->ptr[WE] = mlx_xpm_file_to_image(img->mlx, img->i[WE],
+			&img->width[2], &img->height[2]);
+	img->texture[WE] = (int (*))mlx_get_data_addr(img->ptr[WE],
+			&img->bpp[2], &img->ll[2], &img->en[2]);
+	img->ptr[EA] = mlx_xpm_file_to_image(img->mlx, img->i[EA],
+			&img->width[3], &img->height[3]);
+	img->texture[EA] = (int (*))mlx_get_data_addr(img->ptr[EA], &img->bpp[3],
+			&img->ll[3], &img->en[3]);
+}
 
 int main(int ac, char **av)
 {
@@ -44,15 +65,26 @@ int main(int ac, char **av)
 	// err = 0;
 	parse = NULL;
 	ft_parsing(ac, av, &parse);
-	img.mlx = mlx_init();
-	if (!img.mlx)
-		exit(0);
 
 	char ***p;
 	p = create_map(parse);
 	img.s = p[1];
+	img.i = p[0];
+	while(img.i[j])
+	{
+		printf("%s\n", img.i[SO]);
+		fflush(stdout);
+		j++;
+	}
+	j = 0;
+	img.floor_color = create_color(img.i[F]);
+	img.ceiling_color = create_color(img.i[C]);
+	img.mlx = mlx_init();
+	if (!img.mlx)
+		exit(0);
 	
-	printf("hello\n");
+
+	
 	// ft_parse_clear(&parse);
 	img.win = mlx_new_window(img.mlx, screenWidth, screenHeight, "Hello world!");
 	img.img = mlx_new_image(img.mlx,screenWidth, screenHeight);
@@ -65,40 +97,38 @@ int main(int ac, char **av)
 	img.drawStart = 0;
 	img.drawEnd = 0;
 	img.planeY = 0; //the 2d raycaster version of camera plane
-	while(img.s[j])
-	{
-		printf("%s", img.s[j]);
-		fflush(stdout);
-		j++;
-	}
+	// while(img.s[j])
+	// {
+	// 	printf("%s", img.s[j]);
+	// 	fflush(stdout);
+	// 	j++;
+	// }
 	j = 0;
+	
 	while (img.s[j])
 	{
-		printf("%s", img.s[j]);
 		k = 0;
 		while(img.s[j][k])
 		{
-			printf("%c %d\n", img.s[j][k], k);
-			
-			if (img.s[j][k] == 'P' || img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E')
+			if (img.s[j][k] == 'W' || img.s[j][k] == 'N' || img.s[j][k] == 'S' || img.s[j][k] == 'E')
 			{
 				img.posX = j;
 				img.posY = k;
-				if (img.s[j][k] == 'N')
+				if (img.s[j][k] == 'S')
 				{
 					img.dirX = -1;
 					img.dirY = 0;
 					img.planeX = 0;
 					img.planeY = 0.66;
 				}
-				else if (img.s[j][k] == 'P')
+				else if (img.s[j][k] == 'E')
 				{
 					img.dirX = 0;
 					img.dirY = -1;
 					img.planeX = -0.66;
 					img.planeY = 0;
 				}
-				else if (img.s[j][k] == 'E')
+				else if (img.s[j][k] == 'W')
 				{
 					img.dirX = 0;
 					img.dirY = 1;
@@ -114,7 +144,7 @@ int main(int ac, char **av)
 				}
 				break;
 			}
-			printf("hi0 ");
+			// printf("hi0 ");
 			k++;
 		}
 		j++;
@@ -122,7 +152,7 @@ int main(int ac, char **av)
 	
 	image_putter(&img);
 	
-	printf("%f %f \n", img.posX, img.posY);
+	// printf("%f %f \n", img.posX, img.posY);
 	fflush(stdout);
 	
 	raycast(&img);
