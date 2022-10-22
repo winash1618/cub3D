@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:31:17 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:46:21 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,84 +122,84 @@ void	init_ft_set_map(t_map **map, int *is_already_map, int *start_point, int *en
 
 typedef struct	s_data
 {
-	void	*img;
-	void	*win;
-	void	*mlx;
-	void	*ptr[4];
-	int		*texture[4];
-	int		bpp[4];
-	int		ll[4];
-	int		en[4];
-	char	*addr;
-	double	posx;
-	double	posy;
-	double	dirx;
-	double	diry;
-	double	planex;
-	double	planey;
-	char	**s;
-	char	**i;
-	int	buffer[SCREENHEIGHT][SCREENWIDTH];
-	int width[4];
-	int height[4];
+	void			*img;
+	void			*win;
+	void			*mlx;
+	void			*ptr[4];
+	int				*texture[4];
+	int				bpp[4];
+	int				ll[4];
+	int				en[4];
+	char			*addr;
+	double			posx;
+	double			posy;
+	double			dirx;
+	double			diry;
+	double			planex;
+	double			planey;
+	char			**s;
+	char			**i;
+	int				buffer[SCREENHEIGHT][SCREENWIDTH];
+	int				width[4];
+	int				height[4];
 	unsigned int	drawstart;
 	unsigned int	drawend;
-	int 	floor_color;
-	int		ceiling_color;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+	int				floor_color;
+	int				ceiling_color;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_data;
 
 typedef struct s_loc
 {
-	int x;
-	unsigned int y;
-	int mapX;
-	int mapY;
-	double cameraX;
-	double raydirx;
-	double raydiry;
-	double sideDistX;
-	double sideDistY;
-	double deltaDistX;
-	double deltaDistY;
-	double perpWallDist;
-	int lineHeight;
-	int stepX;
-	int stepY;
-	int hit;
-	int side;
-	double wallX;
-	int texX;
-	int texY;
-	double step;
-	double texPos;
-	int color;
-}	t_loc;
+	unsigned int	y;
+	double			camerax;
+	double			raydirx;
+	double			raydiry;
+	double			sidedistx;
+	double			sidedisty;
+	double			deltadistx;
+	double			deltadisty;
+	double			perpwalldist;
+	double			wallx;
+	double			step;
+	double			texpos;
+	int				x;
+	int				mapx;
+	int				mapy;
+	int				lineheight;
+	int				stepx;
+	int				stepy;
+	int				hit;
+	int				side;
+	int				tex_x;
+	int				tex_y;
+	int				color;
+}					t_loc;
 
 /*-----------------------------------------------*/
-int	ft_parsing(int ac, char **av, t_parse **parse);
+int		ft_parsing(int ac, char **av, t_parse **parse);
 void	ft_parse_clear(t_parse **parse);
 /*-----------------------------------------------*/
-void raycast(t_data *img);
-void ft_error(int err);
-char ***create_map(t_parse *data);
-int	key_check(int keycode, t_data *img);
+void	raycast(t_data *img);
+void	ft_error(int err);
+char	***create_map(t_parse *data);
+int		key_check(int keycode, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int	ft_exit(void);
-void raycast_help1(t_data *img, t_loc *loc);
-void raycast_help2(t_data *img, t_loc *loc);
-void raycast_help3(t_data *img, t_loc *loc);
-void raycast_help4(t_data *img, t_loc *loc);
-void raycast_help5(t_data *img, t_loc *loc);
-void	init_local(t_loc *loc, int x, int mapX, int mapY);
+int		ft_exit(void);
+void	raycast_help1(t_data *img, t_loc *loc);
+void	raycast_help2(t_data *img, t_loc *loc);
+void	raycast_help3(t_data *img, t_loc *loc);
+void	raycast_help4(t_data *img, t_loc *loc);
+void	raycast_help5(t_data *img, t_loc *loc);
+void	init_local(t_loc *loc, int x, int mapx, int mapy);
 void	ft_clear_maps(char ***tab);
-void check_name(char *str);
+void	check_name(char *str);
 void	ft_map_organize(t_data *img, t_parse *parse);
 void	ft_init_player(t_data *img);
 void	ft_put_player(t_data *img);
 void	ft_set_player_dir(t_data *img, int j, int k);
 void	image_putter(t_data *img);
-int	create_color(char *str);
+int		create_color(char *str);
 #endif
