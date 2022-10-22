@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:02:10 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:16:54 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int	main(int ac, char **av)
 	img.mlx = mlx_init();
 	if (!img.mlx)
 		exit(0);
-	img.win = mlx_new_window(img.mlx, screenWidth, screenHeight, "cub3D");
-	img.img = mlx_new_image(img.mlx, screenWidth, screenHeight);
+	img.win = mlx_new_window(img.mlx, SCREENWIDTH, SCREENHEIGHT, "cub3D");
+	img.img = mlx_new_image(img.mlx, SCREENWIDTH, SCREENHEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	image_putter(&img);

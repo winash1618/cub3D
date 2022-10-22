@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:47:54 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 20:34:14 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:16:54 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	raycast_help1(t_data *img, t_loc *loc)
 {
-	loc->cameraX = 2 * loc->x / (double)(screenWidth) - 1;
+	loc->cameraX = 2 * loc->x / (double)(SCREENWIDTH) - 1;
 	loc->rayDirX = img->dirX + img->planeX * loc->cameraX;
 	loc->rayDirY = img->dirY + img->planeY * loc->cameraX;
 	loc->mapX = (int)(img->posX);
@@ -81,21 +81,21 @@ void	raycast_help4(t_data *img, t_loc *loc)
 		loc->perpWallDist = (loc->sideDistX - loc->deltaDistX);
 	else
 		loc->perpWallDist = (loc->sideDistY - loc->deltaDistY);
-	loc->lineHeight = (int)(screenHeight / loc->perpWallDist);
-	img->drawStart = -loc->lineHeight / 2 + screenHeight / 2;
-		img->drawEnd = loc->lineHeight / 2 + screenHeight / 2;
-	if (img->drawEnd >= screenHeight)
-		img->drawEnd = screenHeight - 1;
-	if (img->drawStart >= screenHeight)
+	loc->lineHeight = (int)(SCREENHEIGHT / loc->perpWallDist);
+	img->drawStart = -loc->lineHeight / 2 + SCREENHEIGHT / 2;
+		img->drawEnd = loc->lineHeight / 2 + SCREENHEIGHT / 2;
+	if (img->drawEnd >= SCREENHEIGHT)
+		img->drawEnd = SCREENHEIGHT - 1;
+	if (img->drawStart >= SCREENHEIGHT)
 		img->drawStart = 0;
 	if (loc->side == 0)
 		loc->wallX = img->posY + loc->perpWallDist * loc->rayDirY;
 	else
 		loc->wallX = img->posX + loc->perpWallDist * loc->rayDirX;
 	loc->wallX -= floor((loc->wallX));
-	loc->texX = (int)(loc->wallX * (double)(texWidth));
+	loc->texX = (int)(loc->wallX * (double)(TEXWIDTH));
 	if (loc->side == 0 && loc->rayDirX > 0)
-		loc->texX = texWidth - loc->texX - 1;
+		loc->texX = TEXWIDTH - loc->texX - 1;
 	if (loc->side == 1 && loc->rayDirY < 0)
-		loc->texX = texWidth - loc->texX - 1;
+		loc->texX = TEXWIDTH - loc->texX - 1;
 }

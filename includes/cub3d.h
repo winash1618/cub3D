@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:04:40 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:20:00 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@
 # include <stdbool.h>
 # include <unistd.h>
 
-# define mapWidth 24
-# define mapHeight 24
-# define texWidth 64
-# define texHeight 64
-# define screenWidth 1080
-# define screenHeight 960
-# define rotspeed 0.1
-# define walkspeed 0.185
+# define MAPWIDTH 24
+# define MAPHEIGHT 24
+# define TEXWIDTH 64
+# define TEXHEIGHT 64
+# define SCREENWIDTH 1080
+# define SCREENHEIGHT 960
+# define ROTSPEED 0.1
+# define WALKSPEED 0.185
 
 enum	e_type
 {
@@ -134,7 +134,7 @@ typedef struct	s_data
 	double	planeY;
 	char	**s;
 	char	**i;
-	int	buffer[screenHeight][screenWidth];
+	int	buffer[SCREENHEIGHT][SCREENWIDTH];
 	int width[4];
 	int height[4];
 	unsigned int	drawStart;

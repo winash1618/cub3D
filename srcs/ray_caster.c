@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 20:37:11 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:16:54 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	raycast_help7(t_data *img, t_loc *loc)
 {
-	loc->step = 1.0 * texHeight / loc->lineHeight;
-	loc->texPos = (img->drawStart - screenHeight / 2
+	loc->step = 1.0 * TEXHEIGHT / loc->lineHeight;
+	loc->texPos = (img->drawStart - SCREENHEIGHT / 2
 			+ loc->lineHeight / 2) * loc->step;
 	loc->y = 0;
 }
@@ -25,16 +25,16 @@ void	raycast_help6(t_data *img, t_loc *loc)
 	unsigned int	i;
 
 	i = 0;
-	while (i < screenHeight)
+	while (i < SCREENHEIGHT)
 	{
-		if (i < screenHeight / 2)
+		if (i < SCREENHEIGHT / 2)
 			my_mlx_pixel_put(img, loc->x, i, img->floor_color);
-		else if (i > screenHeight / 2)
+		else if (i > SCREENHEIGHT / 2)
 			my_mlx_pixel_put(img, loc->x, i, img->ceiling_color);
 		i++;
 	}
 	i = 0;
-	while (i < screenHeight)
+	while (i < SCREENHEIGHT)
 	{
 		if (i >= img->drawStart && i <= img->drawEnd)
 		{
@@ -47,7 +47,7 @@ void	raycast_help6(t_data *img, t_loc *loc)
 void	raycast_help5(t_data *img, t_loc *loc)
 {
 	raycast_help7(img, loc);
-	while (loc->y < screenHeight)
+	while (loc->y < SCREENHEIGHT)
 	{
 		if (loc->y >= img->drawStart && loc->y <= img->drawEnd)
 		{
@@ -55,16 +55,16 @@ void	raycast_help5(t_data *img, t_loc *loc)
 			loc->texPos += loc->step;
 			if (loc->side == 0 && loc->rayDirX > 0)
 				loc->color = (int)img->texture[0][(int)
-					texHeight * loc->texY + loc->texX];
+					TEXHEIGHT * loc->texY + loc->texX];
 			else if (loc->side == 0 && loc->rayDirX < 0)
 				loc->color = (int)img->texture[1][(int)
-					texHeight * loc->texY + loc->texX];
+					TEXHEIGHT * loc->texY + loc->texX];
 			else if (loc->side == 1 && loc->rayDirY > 0)
 				loc->color = (int)img->texture[2][(int)
-					texHeight * loc->texY + loc->texX];
+					TEXHEIGHT * loc->texY + loc->texX];
 			else if (loc->side == 1 && loc->rayDirY < 0)
 				loc->color = (int)img->texture[3][(int)
-					texHeight * loc->texY + loc->texX];
+					TEXHEIGHT * loc->texY + loc->texX];
 			if (loc->side == 1)
 				loc->color = (loc->color >> 1) & 8355711;
 			img->buffer[loc->y][loc->x] = loc->color;
@@ -95,7 +95,7 @@ void	raycast(t_data *img)
 	map_x = 0;
 	map_y = 0;
 	x = 0;
-	while (x < screenWidth)
+	while (x < SCREENWIDTH)
 	{
 		raycast_help(img, x, map_x, map_y);
 		x++;
