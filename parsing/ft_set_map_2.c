@@ -1,92 +1,89 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_info.c                                          :+:      :+:    :+:   */
+/*   ft_set_map_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 10:14:55 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 13:42:19 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/10/22 14:07:42 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/22 14:11:48 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-t_info	*ft_info_new(char *data, enum e_type type)
+void	ft_handle_map(t_map **map, char *tmp)
 {
-	t_info	*new;
-
-	new = (t_info *)malloc(sizeof(t_info));
-	if (new == NULL)
-		return (NULL);
-	new->data = ft_strdup(data);
-	new->type = type;
-	new->prev = NULL;
-	new->next = NULL;
-	return (new);
+	if (!*map)
+		*map = ft_map_new(tmp);
+	else
+		ft_map_add_back(map, ft_map_new(tmp));
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_info_add_back(t_info **lst, t_info *new)
+int	there_is_new_line(char *str)
 {
-	t_info	*tmp;
+	int	i;
 
-	if (*lst == NULL)
+	i = 0;
+	while (str[i])
 	{
-		*lst = new;
-		return ;
+		if (str[i] == '\n')
+			return (1);
+		i++;
 	}
-	tmp = *lst;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new;
-	new->prev = tmp;
+	return (0);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_info_add_front(t_info **lst, t_info *new)
+int	ft_is_begmap(char *tmp)
 {
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	new->next = *lst;
-	(*lst)->prev = new;
-	*lst = new;
+	int	i;
+
+	i = 0;
+	while (tmp[i] == ' ')
+		i++;
+	if (ft_isdigit(tmp[i]))
+		return (1);
+	return (0);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_info_clear(t_info **lst)
+int	ft_start_point(char *str)
 {
-	t_info	*tmp;
+	int	i;
+	int	count;
 
-	if (*lst == NULL)
-		return ;
-	while (*lst != NULL)
+	i = 0;
+	count = 0;
+	while (str[i])
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		free(tmp->data);
-		free(tmp);
+		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
+			count++;
+		i++;
 	}
+	return (count);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_print_info(t_info *lst)
+int	ft_is_linemap(char *tmp)
 {
-	t_info	*tmp;
+	int	i;
 
-	tmp = lst;
-	while (tmp != NULL)
+	i = 0;
+	while (tmp[i])
 	{
-		printf("{[%s], %d}\n", tmp->data, tmp->type);
-		tmp = tmp->next;
+		if (tmp[i] == '1' || tmp[i] == '0' || tmp[i] == ' ' || tmp[i] == 'N'
+			|| tmp[i] == 'S' || tmp[i] == 'E' || tmp[i] == 'W')
+			i++;
+		else
+			return (0);
 	}
+	return (1);
 }
 /*----------------------------------------------------*/

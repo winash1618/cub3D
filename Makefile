@@ -6,7 +6,7 @@
 #    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/08 14:38:15 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/22 16:53:38 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ SRCS		=	cub3d.c main.c key_event.c ray_caster.c
 
 SRC_DIR		=	srcs
 
-PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_set_info.c ft_set_map.c
+PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_set_info.c ft_set_map.c\
+				ft_set_info_1.c ft_set_info_2.c ft_set_info_3.c ft_set_map_1.c\
+				ft_set_map_2.c ft_set_map_3.c\
 
 PARSER_DIR	=	parsing
 	
@@ -36,7 +38,7 @@ OBJS		+=	$(addprefix $(PARSER_DIR)/, $(PARSER:%c=%o))
 
 CC			=	gcc
 
-CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast
+CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast 
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@

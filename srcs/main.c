@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 16:46:50 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:56:41 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,42 @@
 // 			&img->ll[3], &img->en[3]);
 // }
 
+void	ft_error(int err)
+{
+	if (err == 1)
+		printf("Error: Invalid file.\n");
+	else if (err == 2)
+		printf("Error: Invalid file format.\n");
+	else if (err == 3)
+		printf("Error: Invalid Configuration Map.\n");
+	else if (err == 4)
+		printf("Error: Invalid line in the Map.\n");
+	else if (err == 5)
+		printf("Error: Invalid Map.\n");
+	else if (err == 6)
+		printf("Error: Invalid File Name.\n");
+	else if (err == 7)
+		printf("Error: Invalid Arguments.\n");
+	else
+		printf("Error: ...\n");
+}
+
 int main(int ac, char **av)
 {
-	// int		err;
+	int		err;
 	t_parse	*parse;
 
-	// err = 0;
+	err = 0;
 	parse = NULL;
-	ft_parsing(ac, av, &parse);
+	err = ft_parsing(ac, av, &parse);
+	if(parse)
+		ft_check_path(parse->info, &err);
+	if (err)
+	{
+		ft_error(err);
+		ft_parse_clear(&parse);
+		return (0);
+	}
 	ft_parse_clear(&parse);
 	
 

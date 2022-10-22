@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/15 15:53:05 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 16:31:39 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ enum	e_type
 {
 	NO, SO, WE, EA, F, C
 };
-
 /*------------------------------------------------*/
 typedef struct s_info
 {
@@ -55,6 +54,9 @@ typedef struct s_map
 	// no new line after a line
 	// each 0 should not have a space around it
 	// each line should begin and end with 1
+	int start_point;
+	int is_already_map;
+	int end_map;
 	struct s_map *next;
 } t_map;
 
@@ -63,8 +65,11 @@ typedef struct s_parse
 	t_info	*info;
 	t_map	*map;
 } t_parse;
+void	ft_error(int err);
+void	ft_check_path(t_info *info, int *err);
 /*------------------FT_INFO------------------*/
 t_info	*ft_info_new(char *data, enum e_type type);
+// t_info	*ft_info_new(char *data, enum e_type type, int *err);
 void	ft_info_add_back(t_info **lst, t_info *new);
 void	ft_info_add_front(t_info **lst, t_info *new);
 void	ft_info_clear(t_info **lst);
@@ -87,9 +92,27 @@ int		ft_is_map(char *line, int *err);
 int		ft_valid_line(char *line, int i, int *err);
 int		ft_tablen(char **tab);
 int		ft_spaces(char *line);
+int		ft_only_nums(char *str);
+void	ft_valid_nums(char *str, int type, int *err);
+char	*ft_rm_spaces(char *str);
 /*-------------------------------------------*/
 /*----------------FT_SET_MAP-----------------*/
 t_map	*ft_set_map(int fd, int *err);
+int		ft_is_valid_end(char *line);
+int		ft_space_0(char *str, char *str1, char *str2, int i);
+int		ft_check_data2(char *str, char *str1, char *str2);
+int		ft_check_data(t_map *line, t_map *line1, t_map *line2);
+int		ft_check_map(t_map *map);
+void	ft_handle_map(t_map **map, char *tmp);
+int		there_is_new_line(char *str);
+int		ft_is_begmap(char *tmp);
+int		ft_start_point(char *str);
+int		ft_is_linemap(char *tmp);
+void	ft_map_helper_2(char *line, char **tmp, int *end_map);
+int		ft_map_helper_1(char **tmp, int *is_already_map, int *start_point, t_map **map);
+int		ft_no_line(char **line, int fd, int *err, int *end_map);
+int		ft_map_helper_3(char **line, int *err, int *is_already_map);
+void	init_ft_set_map(t_map **map, int *is_already_map, int *start_point, int *end_map);
 /*-------------------------------------------*/
 /*-----------------------------------------------*/
 
@@ -154,7 +177,7 @@ typedef struct s_loc
 }	t_loc;
 
 /*-----------------------------------------------*/
-int	ft_parsing(int ac, char **av, t_parse **parse);
+int		ft_parsing(int ac, char **av, t_parse **parse);
 void	ft_parse_clear(t_parse **parse);
 /*-----------------------------------------------*/
 void raycast(t_data *img);

@@ -1,92 +1,113 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_info.c                                          :+:      :+:    :+:   */
+/*   ft_set_info_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 10:14:55 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 13:42:19 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/10/22 13:48:12 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/22 13:48:50 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-t_info	*ft_info_new(char *data, enum e_type type)
+char	*ft_rm_spaces(char *str)
 {
-	t_info	*new;
+	int		i;
+	int		len;
+	int		j;
+	char	*new;
 
-	new = (t_info *)malloc(sizeof(t_info));
-	if (new == NULL)
+	i = 0;
+	j = 0;
+	while (str[i] == ' ')
+		i++;
+	len = ft_strlen(str) - i;
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
 		return (NULL);
-	new->data = ft_strdup(data);
-	new->type = type;
-	new->prev = NULL;
-	new->next = NULL;
+	while (str[i])
+	{
+		new[j] = str[i];
+		i++;
+		j++;
+	}
 	return (new);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_info_add_back(t_info **lst, t_info *new)
+void	ft_valid_nums(char *str, int type, int *err)
 {
-	t_info	*tmp;
+	char	**nums;
 
-	if (*lst == NULL)
+	nums = NULL;
+	if (type == F || type == C)
 	{
-		*lst = new;
-		return ;
+		if (!ft_only_nums(str))
+		{
+			*err = 1;
+			return ;
+		}
+		nums = ft_split(str, ',');
+		if (ft_tablen(nums) != 3)
+		{
+			*err = 1;
+			ft_free_tab(nums);
+			return ;
+		}
+		if (ft_strlen(nums[0]) > 3 || ft_strlen(nums[1]) > 3
+			|| ft_strlen(nums[2]) > 3)
+			*err = 1;
+		if (ft_atoi(nums[0]) > 255 || ft_atoi(nums[1]) > 255
+			|| ft_atoi(nums[2]) > 255)
+			*err = 1;
 	}
-	tmp = *lst;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = new;
-	new->prev = tmp;
+	ft_free_tab(nums);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_info_add_front(t_info **lst, t_info *new)
+int	ft_spaces(char *line)
 {
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	new->next = *lst;
-	(*lst)->prev = new;
-	*lst = new;
+	char	*str;
+
+	str = line;
+	while (*str == ' ')
+		str++;
+	if (!str || !ft_strcmp(str, "\n"))
+		return (1);
+	return (0);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_info_clear(t_info **lst)
+void	ft_free_tab(char **tab)
 {
-	t_info	*tmp;
+	int	i;
 
-	if (*lst == NULL)
+	i = 0;
+	if (!tab)
 		return ;
-	while (*lst != NULL)
+	while (tab[i])
 	{
-		tmp = *lst;
-		*lst = (*lst)->next;
-		free(tmp->data);
-		free(tmp);
+		free(tab[i]);
+		i++;
 	}
+	free(tab);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_print_info(t_info *lst)
+int	ft_tablen(char **tab)
 {
-	t_info	*tmp;
+	int	i;
 
-	tmp = lst;
-	while (tmp != NULL)
-	{
-		printf("{[%s], %d}\n", tmp->data, tmp->type);
-		tmp = tmp->next;
-	}
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
 /*----------------------------------------------------*/
