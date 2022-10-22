@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:20:00 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:31:17 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,19 @@
 
 enum	e_type
 {
-	NO, SO, WE, EA, F, C
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C
 };
 
 /*------------------------------------------------*/
 typedef struct s_info
 {
-	struct s_info *prev;
-	char *data; // path_to_the_west_texture
+	struct s_info	*prev;
+	char			*data; // path_to_the_west_texture
 	// we need to check if the path is valid, else exit
 	enum e_type type; // WE
 	// for F and C, we need to check if the data is valid, else exit
@@ -126,19 +131,19 @@ typedef struct	s_data
 	int		ll[4];
 	int		en[4];
 	char	*addr;
-	double	posX;
-	double	posY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	posx;
+	double	posy;
+	double	dirx;
+	double	diry;
+	double	planex;
+	double	planey;
 	char	**s;
 	char	**i;
 	int	buffer[SCREENHEIGHT][SCREENWIDTH];
 	int width[4];
 	int height[4];
-	unsigned int	drawStart;
-	unsigned int	drawEnd;
+	unsigned int	drawstart;
+	unsigned int	drawend;
 	int 	floor_color;
 	int		ceiling_color;
 	int		bits_per_pixel;
@@ -153,8 +158,8 @@ typedef struct s_loc
 	int mapX;
 	int mapY;
 	double cameraX;
-	double rayDirX;
-	double rayDirY;
+	double raydirx;
+	double raydiry;
 	double sideDistX;
 	double sideDistY;
 	double deltaDistX;

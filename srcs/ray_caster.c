@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:16:54 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:31:17 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	raycast_help7(t_data *img, t_loc *loc)
 {
 	loc->step = 1.0 * TEXHEIGHT / loc->lineHeight;
-	loc->texPos = (img->drawStart - SCREENHEIGHT / 2
+	loc->texPos = (img->drawstart - SCREENHEIGHT / 2
 			+ loc->lineHeight / 2) * loc->step;
 	loc->y = 0;
 }
@@ -36,7 +36,7 @@ void	raycast_help6(t_data *img, t_loc *loc)
 	i = 0;
 	while (i < SCREENHEIGHT)
 	{
-		if (i >= img->drawStart && i <= img->drawEnd)
+		if (i >= img->drawstart && i <= img->drawend)
 		{
 			my_mlx_pixel_put(img, loc->x, i, img->buffer[i][loc->x]);
 		}
@@ -49,20 +49,20 @@ void	raycast_help5(t_data *img, t_loc *loc)
 	raycast_help7(img, loc);
 	while (loc->y < SCREENHEIGHT)
 	{
-		if (loc->y >= img->drawStart && loc->y <= img->drawEnd)
+		if (loc->y >= img->drawstart && loc->y <= img->drawend)
 		{
 			loc->texY = (int)loc->texPos & (img->height[0] - 1);
 			loc->texPos += loc->step;
-			if (loc->side == 0 && loc->rayDirX > 0)
+			if (loc->side == 0 && loc->raydirx > 0)
 				loc->color = (int)img->texture[0][(int)
 					TEXHEIGHT * loc->texY + loc->texX];
-			else if (loc->side == 0 && loc->rayDirX < 0)
+			else if (loc->side == 0 && loc->raydirx < 0)
 				loc->color = (int)img->texture[1][(int)
 					TEXHEIGHT * loc->texY + loc->texX];
-			else if (loc->side == 1 && loc->rayDirY > 0)
+			else if (loc->side == 1 && loc->raydiry > 0)
 				loc->color = (int)img->texture[2][(int)
 					TEXHEIGHT * loc->texY + loc->texX];
-			else if (loc->side == 1 && loc->rayDirY < 0)
+			else if (loc->side == 1 && loc->raydiry < 0)
 				loc->color = (int)img->texture[3][(int)
 					TEXHEIGHT * loc->texY + loc->texX];
 			if (loc->side == 1)

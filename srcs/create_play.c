@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:39:05 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:03:21 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:31:17 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ void	ft_set_player_dir(t_data *img, int j, int k)
 {
 	if (img->s[j][k] == 'S')
 	{
-		img->dirX = -1;
-		img->planeY = 0.66;
+		img->dirx = -1;
+		img->planey = 0.66;
 	}
 	else if (img->s[j][k] == 'E')
 	{
-		img->dirY = -1;
-		img->planeX = -0.66;
+		img->diry = -1;
+		img->planex = -0.66;
 	}
 	else if (img->s[j][k] == 'W')
 	{
-		img->dirY = 1;
-		img->planeX = -0.66;
+		img->diry = 1;
+		img->planex = -0.66;
 	}
 	else
 	{
-		img->dirX = 1;
-		img->planeY = 0.66;
+		img->dirx = 1;
+		img->planey = 0.66;
 	}
 }
 
@@ -71,8 +71,8 @@ void	ft_put_player(t_data *img)
 			if (img->s[j][k] == 'W' || img->s[j][k] == 'N'
 				|| img->s[j][k] == 'S' || img->s[j][k] == 'E')
 			{
-				img->posX = j;
-				img->posY = k;
+				img->posx = j;
+				img->posy = k;
 				ft_set_player_dir(img, j, k);
 				break ;
 			}
@@ -84,14 +84,14 @@ void	ft_put_player(t_data *img)
 
 void	ft_init_player(t_data *img)
 {
-	img->posX = 0;
-	img->posY = 0;
-	img->dirX = 0;
-	img->dirY = 0;
-	img->planeX = 0;
-	img->planeY = 0;
-	img->drawStart = 0;
-	img->drawEnd = 0;
+	img->posx = 0;
+	img->posy = 0;
+	img->dirx = 0;
+	img->diry = 0;
+	img->planex = 0;
+	img->planey = 0;
+	img->drawstart = 0;
+	img->drawend = 0;
 }
 
 void	ft_map_organize(t_data *img, t_parse *parse)

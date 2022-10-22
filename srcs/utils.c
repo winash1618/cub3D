@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:21:13 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 20:38:50 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:28:08 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	init_local(t_loc *loc, int x, int mapX, int mapY)
 	loc->mapX = mapX;
 	loc->mapY = mapY;
 	loc->cameraX = 0;
-	loc->rayDirX = 0;
-	loc->rayDirY = 0;
+	loc->raydirx = 0;
+	loc->raydiry = 0;
 	loc->sideDistX = 0;
 	loc->sideDistY = 0;
 	loc->deltaDistX = 0;

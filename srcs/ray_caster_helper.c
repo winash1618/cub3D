@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:47:54 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:16:54 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 21:31:17 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,41 @@
 void	raycast_help1(t_data *img, t_loc *loc)
 {
 	loc->cameraX = 2 * loc->x / (double)(SCREENWIDTH) - 1;
-	loc->rayDirX = img->dirX + img->planeX * loc->cameraX;
-	loc->rayDirY = img->dirY + img->planeY * loc->cameraX;
-	loc->mapX = (int)(img->posX);
-	loc->mapY = (int)(img->posY);
-	if (loc->rayDirX == 0)
+	loc->raydirx = img->dirx + img->planex * loc->cameraX;
+	loc->raydiry = img->diry + img->planey * loc->cameraX;
+	loc->mapX = (int)(img->posx);
+	loc->mapY = (int)(img->posy);
+	if (loc->raydirx == 0)
 		loc->deltaDistX = 1e30;
 	else
-		loc->deltaDistX = fabs(1 / loc->rayDirX);
-	if (loc->rayDirY == 0)
+		loc->deltaDistX = fabs(1 / loc->raydirx);
+	if (loc->raydiry == 0)
 		loc->deltaDistY = 1e30;
 	else
-		loc->deltaDistY = fabs(1 / loc->rayDirY);
+		loc->deltaDistY = fabs(1 / loc->raydiry);
 }
 
 void	raycast_help2(t_data *img, t_loc *loc)
 {
-	if (loc->rayDirX < 0)
+	if (loc->raydirx < 0)
 	{
 		loc->stepX = -1;
-		loc->sideDistX = (img->posX - loc->mapX) * loc->deltaDistX;
+		loc->sideDistX = (img->posx - loc->mapX) * loc->deltaDistX;
 	}
 	else
 	{
 		loc->stepX = 1;
-		loc->sideDistX = (loc->mapX + 1.0 - img->posX) * loc->deltaDistX;
+		loc->sideDistX = (loc->mapX + 1.0 - img->posx) * loc->deltaDistX;
 	}
-	if (loc->rayDirY < 0)
+	if (loc->raydiry < 0)
 	{
 		loc->stepY = -1;
-		loc->sideDistY = (img->posY - loc->mapY) * loc->deltaDistY;
+		loc->sideDistY = (img->posy - loc->mapY) * loc->deltaDistY;
 	}
 	else
 	{
 		loc->stepY = 1;
-		loc->sideDistY = (loc->mapY + 1.0 - img->posY) * loc->deltaDistY;
+		loc->sideDistY = (loc->mapY + 1.0 - img->posy) * loc->deltaDistY;
 	}
 }
 
@@ -82,20 +82,20 @@ void	raycast_help4(t_data *img, t_loc *loc)
 	else
 		loc->perpWallDist = (loc->sideDistY - loc->deltaDistY);
 	loc->lineHeight = (int)(SCREENHEIGHT / loc->perpWallDist);
-	img->drawStart = -loc->lineHeight / 2 + SCREENHEIGHT / 2;
-		img->drawEnd = loc->lineHeight / 2 + SCREENHEIGHT / 2;
-	if (img->drawEnd >= SCREENHEIGHT)
-		img->drawEnd = SCREENHEIGHT - 1;
-	if (img->drawStart >= SCREENHEIGHT)
-		img->drawStart = 0;
+	img->drawstart = -loc->lineHeight / 2 + SCREENHEIGHT / 2;
+		img->drawend = loc->lineHeight / 2 + SCREENHEIGHT / 2;
+	if (img->drawend >= SCREENHEIGHT)
+		img->drawend = SCREENHEIGHT - 1;
+	if (img->drawstart >= SCREENHEIGHT)
+		img->drawstart = 0;
 	if (loc->side == 0)
-		loc->wallX = img->posY + loc->perpWallDist * loc->rayDirY;
+		loc->wallX = img->posy + loc->perpWallDist * loc->raydiry;
 	else
-		loc->wallX = img->posX + loc->perpWallDist * loc->rayDirX;
+		loc->wallX = img->posx + loc->perpWallDist * loc->raydirx;
 	loc->wallX -= floor((loc->wallX));
 	loc->texX = (int)(loc->wallX * (double)(TEXWIDTH));
-	if (loc->side == 0 && loc->rayDirX > 0)
+	if (loc->side == 0 && loc->raydirx > 0)
 		loc->texX = TEXWIDTH - loc->texX - 1;
-	if (loc->side == 1 && loc->rayDirY < 0)
+	if (loc->side == 1 && loc->raydiry < 0)
 		loc->texX = TEXWIDTH - loc->texX - 1;
 }
