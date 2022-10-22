@@ -6,3 +6,5 @@ else if (err == 3)
 	printf("Error: Mutiple start points)
 else if (err == 4)
 	printf("Error: Invalid line in the Map)
+
+//
