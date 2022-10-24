@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 07:29:21 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 19:54:58 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:41:01 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int	ft_parsing(int ac, char **av, t_parse **parse)
 
 	err = 0;
 	if (ac == 1 || ac > 2)
-	{
-		printf("Error: Invalid number of arguments\n");
 		return (7);
-	}
 	if (ft_check_av(av[1]))
 		return (6);
 	fd = open(av[1], O_RDONLY);
@@ -59,6 +56,8 @@ int	ft_parsing(int ac, char **av, t_parse **parse)
 	fd = open(av[1], O_RDONLY);
 	(*parse)->map = ft_set_map(fd, &err);
 	close(fd);
+	if (!(*parse)->info || !(*parse)->map || ft_info_len((*parse)->info) != 6)
+		return (1);
 	return (err);
 }
 /*----------------------------------------------------*/

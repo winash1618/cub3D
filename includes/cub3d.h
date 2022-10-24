@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 16:31:39 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:40:57 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_info_add_back(t_info **lst, t_info *new);
 void	ft_info_add_front(t_info **lst, t_info *new);
 void	ft_info_clear(t_info **lst);
 void	ft_print_info(t_info *lst);
+int		ft_info_len(t_info *lst);
 /*-------------------------------------------*/
 /*------------------FT_MAP-------------------*/
 t_map	*ft_map_new(char *data);
