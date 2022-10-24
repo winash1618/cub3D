@@ -6,12 +6,18 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:39:05 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:31:17 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 08:30:23 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief first it will convert xpm file to image then position that image on to
+ * the window
+ * 
+ * @param img data structure related to the image. 
+ */
 void	image_putter(t_data *img)
 {
 	img->ptr[NO] = mlx_xpm_file_to_image(img->mlx, img->i[NO],
@@ -32,6 +38,14 @@ void	image_putter(t_data *img)
 			&img->ll[EA], &img->en[EA]);
 }
 
+/**
+ * @brief set direction of the player according the character
+ * representing the player N - north, E - East, S - South, W - West
+ * 
+ * @param img data structure related to the image
+ * @param j int value corresponding map x co ordinate
+ * @param k int value corresponding map y co ordinate
+ */
 void	ft_set_player_dir(t_data *img, int j, int k)
 {
 	if (img->s[j][k] == 'S')
@@ -56,6 +70,12 @@ void	ft_set_player_dir(t_data *img, int j, int k)
 	}
 }
 
+/**
+ * @brief position the player in the map according to where player
+ * is located in the double string array player can N, E, S, W
+ * 
+ * @param img data structure related to the image
+ */
 void	ft_put_player(t_data *img)
 {
 	int	j;
@@ -82,6 +102,12 @@ void	ft_put_player(t_data *img)
 	}
 }
 
+/**
+ * @brief initializing position, direction and plane
+ * the player is currently present.
+ * 
+ * @param img data structure related to image.
+ */
 void	ft_init_player(t_data *img)
 {
 	img->posx = 0;
@@ -94,6 +120,19 @@ void	ft_init_player(t_data *img)
 	img->drawend = 0;
 }
 
+/**
+ * @brief Organise the map after parsing, here we are doing four
+ * things first we convert data structure after parsing that contains
+ * two linked list related to info and map into an array double string
+ * array then we save map info in double array in to img->i and map data
+ * in double array in to img->s. after that we get the floor color
+ * from img->i[F] which contain floor color in string (r,g,b) format store
+ * it in img->floor_color which is an integer value, then same is done for
+ * ceiling color. Now free p that was malloced in create map.
+ * 
+ * @param img data structure related to graphical part of the game
+ * @param parse data structure related to parsing
+ */
 void	ft_map_organize(t_data *img, t_parse *parse)
 {
 	char	***p;

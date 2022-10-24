@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 19:13:55 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 09:23:53 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:21:43 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:21:46 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 14:13:57 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 18:21:35 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:24:22 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:24:23 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

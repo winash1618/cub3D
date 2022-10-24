@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
+#    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/11/03 18:41:50 by ayassin           #+#    #+#              #
-#    Updated: 2022/10/08 15:56:24 by mkaruvan         ###   ########.fr        #
+#    Created: 2022/10/24 07:27:50 by mkaruvan          #+#    #+#              #
+#    Updated: 2022/10/24 07:27:51 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

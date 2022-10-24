@@ -6,12 +6,18 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:21:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:29:32 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:14:04 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief move up or down according to the keycode
+ * 
+ * @param keycode int value 0 for up, 2 for down
+ * @param img data structure related to the graphical part of the game
+ */
 void	key_check_updown(int keycode, t_data *img)
 {
 	if (keycode == 2)
@@ -34,6 +40,12 @@ void	key_check_updown(int keycode, t_data *img)
 	}
 }
 
+/**
+ * @brief move left or right according to the keycode
+ * 
+ * @param keycode int value 13 for right 1 for left
+ * @param img data structure related to the game
+ */
 void	key_check_rightleft(int keycode, t_data *img)
 {
 	if (keycode == 13)
@@ -56,6 +68,13 @@ void	key_check_rightleft(int keycode, t_data *img)
 	}
 }
 
+/**
+ * @brief rotate clock wise or anti clock wise according to the keycode
+ * 
+ * @param keycode if keycode is 123 rotate clockwise, else if 124 
+ * rotate anti clock wise
+ * @param img data structure related to graphical part the game
+ */
 void	key_check_rotate(int keycode, t_data *img)
 {
 	double	old_dir_x;
@@ -83,13 +102,24 @@ void	key_check_rotate(int keycode, t_data *img)
 	}
 }
 
+/**
+ * @brief here we execute three functions according to the keycode and change
+ * the values of img->dirx, img->diry, plane->dirx and plane->diry after that
+ * check if keycode is 53 true exit the program. after start the ray casting.
+ * 
+ * @param keycode int value corresponding to the key we pressed
+ * @param img data structure related to graphical part of the game
+ * @return int allways return 0
+ */
 int	key_check(int keycode, t_data *img)
 {
 	key_check_updown(keycode, img);
 	key_check_rightleft(keycode, img);
 	key_check_rotate(keycode, img);
 	if (keycode == 53)
+	{
 		exit(1);
+	}
 	raycast(img);
 	return (0);
 }

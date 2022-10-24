@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 19:15:19 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 18:17:23 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:24:49 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:24:50 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

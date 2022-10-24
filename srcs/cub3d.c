@@ -6,13 +6,18 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:10:36 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 20:39:58 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 08:10:28 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*------------------------------------------*/
+/**
+ * @brief find the number of nodes in info
+ * 
+ * @param info linked list related to map info
+ * @return int number of nodes
+ */
 int	ft_len_info(t_info *info)
 {
 	t_info	*tmp;
@@ -27,9 +32,13 @@ int	ft_len_info(t_info *info)
 	}
 	return (len);
 }
-/*------------------------------------------*/
 
-/*------------------------------------------*/
+/**
+ * @brief find the height of the map.
+ * 
+ * @param map linked list related to parsed map.
+ * @return int map height
+ */
 int	ft_len_map(t_map *map)
 {
 	t_map	*tmp;
@@ -44,9 +53,13 @@ int	ft_len_map(t_map *map)
 	}
 	return (len);
 }
-/*------------------------------------------*/
 
-/*------------------------------------------*/
+/**
+ * @brief convert linked list related to parsed map to double array
+ * 
+ * @param map linked list related to parsed map
+ * @return char** double array contains parsed map
+ */
 char	**ft_tab_map(t_map *map)
 {
 	char	**tab;
@@ -70,9 +83,13 @@ char	**ft_tab_map(t_map *map)
 	tab[i] = NULL;
 	return (tab);
 }
-/*------------------------------------------*/
 
-/*------------------------------------------*/
+/**
+ * @brief convert linked list in info to double array
+ * 
+ * @param info linked list related to parsing info.
+ * @return char** double array contains parsing info.
+ */
 char	**ft_tab_info(t_info *info)
 {
 	char	**tab;
@@ -97,6 +114,14 @@ char	**ft_tab_info(t_info *info)
 	return (tab);
 }
 
+/**
+ * @brief convert parsed data in linked list to two double string array
+ * and save its address in an array.
+ * 
+ * @param data data structure related to the parsing
+ * @return char*** pointer to the first element of the array that contain 
+ * two double array.
+ */
 char	***create_map(t_parse *data)
 {
 	char	***tab;

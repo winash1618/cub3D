@@ -6,19 +6,11 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:42:10 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:40:57 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	raycast_help7(t_data *img, t_loc *loc)
-{
-	loc->step = 1.0 * TEXHEIGHT / loc->lineheight;
-	loc->texpos = (img->drawstart - SCREENHEIGHT / 2
-			+ loc->lineheight / 2) * loc->step;
-	loc->y = 0;
-}
 
 void	raycast_help6(t_data *img, t_loc *loc)
 {
@@ -44,6 +36,28 @@ void	raycast_help6(t_data *img, t_loc *loc)
 	}
 }
 
+void	raycast_help7(t_data *img, t_loc *loc)
+{
+	loc->step = 1.0 * TEXHEIGHT / loc->lineheight;
+	loc->texpos = (img->drawstart - SCREENHEIGHT / 2
+			+ loc->lineheight / 2) * loc->step;
+	loc->y = 0;
+}
+
+/**
+ * @brief first we will go to the ray cast help 7 which made just to
+ * satisfy the norminette. It will set step
+ * then calculate texture position in the image according to the 
+ * number of steps, set y = 0. then we will while loop until y < screen height
+ * if y is between draw start and draw end we get the corresponding color
+ * from the texture accoding to which type of wall it is, remember we have
+ * four walls. then we darken the color of wall whoose side is one to get
+ * that 3d effect and then store the color value in buffer.
+ * 
+ * @param img data structure related graphical part of the game
+ * @param loc data structure for raycasting only it contains all the local
+ * variable need for raycasting.
+ */
 void	raycast_help5(t_data *img, t_loc *loc)
 {
 	raycast_help7(img, loc);
@@ -73,6 +87,22 @@ void	raycast_help5(t_data *img, t_loc *loc)
 	}
 }
 
+/**
+ * @brief this is an helper funtion for raycasting
+ * init local is for initializing the local variable of raycasting
+ * raycast_help1 is for intializing some variable to the required value
+ * raycast_help2 is for step in x direction and y direction
+ * raycast_help3 is for DDA algorithm
+ * raycast_help4 is for finding wall height and where it starts and end
+ * raycast_help5 is for find the color of each pixel in the screen
+ * raycast_help6 is for put the 
+ * 
+ * @param img data structure related to the graphical part of the game.
+ * @param x int value corresponding to the where we are in the width of
+ * the screen
+ * @param mapx int value allways starts from zero for raycasting
+ * @param mapy int value allways starts from zero for raycasting
+ */
 void	raycast_help(t_data *img, int x, int mapx, int mapy)
 {
 	t_loc	loc;
@@ -86,6 +116,14 @@ void	raycast_help(t_data *img, int x, int mapx, int mapy)
 	raycast_help6(img, &loc);
 }
 
+/**
+ * @brief function which will do the entire raycasting process
+ * we will while loop over untill x < Screen width and 
+ * call raycast help , then we put image to the window using 
+ * using mlx_put_image_to_window.
+ * 
+ * @param img data structure related to the graphical part of the game
+ */
 void	raycast(t_data *img)
 {
 	int	x;

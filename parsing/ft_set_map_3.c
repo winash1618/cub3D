@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_map_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 16:20:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 16:35:43 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 08:43:02 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ int	ft_no_line(char **line, int fd, int *err, int *end_map)
 int	ft_map_helper_3(char **line, int *err, int *is_already_map)
 {
 	if (*is_already_map)
+	{
 		*err = 4;
+		free(*line);
+		*line = NULL;
+		return (0);
+	}
 	free(*line);
 	*line = NULL;
 	return (1);

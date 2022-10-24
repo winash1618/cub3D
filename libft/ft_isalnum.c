@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 19:10:12 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 09:58:24 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:22:21 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:22:22 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

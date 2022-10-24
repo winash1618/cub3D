@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 17:15:47 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 11:10:34 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:24:03 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:24:04 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

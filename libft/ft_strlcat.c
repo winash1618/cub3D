@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 19:39:55 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/28 15:25:24 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:26:16 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:26:17 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

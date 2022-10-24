@@ -6,17 +6,33 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:16:54 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 07:36:48 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief convert the color from trgb to its respective integer standard
+ * 
+ * @param t transparency
+ * @param r red
+ * @param g green
+ * @param b blue
+ * @return int The color integer standard
+ */
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+/**
+ * @brief Create color in integer standard from a given string
+ * For example:
+ * str = "120,255,3", each comma separated value is between 0-255
+ * @param str string format of rgb saperated by comma
+ * @return int The color integer standard
+ */
 int	create_color(char *str)
 {
 	char	**s;
@@ -35,6 +51,11 @@ int	create_color(char *str)
 	return (create_trgb(0, a[0], a[1], a[2]));
 }
 
+/**
+ * @brief print proper error message to stdout
+ * 
+ * @param err int value represent type of error
+ */
 void	ft_error(int err)
 {
 	if (err == 1)
@@ -55,6 +76,14 @@ void	ft_error(int err)
 		printf("Error: ...\n");
 }
 
+/**
+ * @brief check for any errors in parsing
+ * 
+ * @param parse data structure corresponding to the parsing
+ * @param err pointer to the int represent type of error we 
+ * may get by default it is zero
+ * @return int return 0 in all cases
+ */
 int	check_parse(t_parse *parse, int *err)
 {
 	if (parse)
@@ -68,6 +97,13 @@ int	check_parse(t_parse *parse, int *err)
 	return (0);
 }
 
+/**
+ * @brief This is where we begin our program
+ * 
+ * @param ac number arguements given
+ * @param av double string array representing arguements given
+ * @return int return 0 in all case and exits the program
+ */
 int	main(int ac, char **av)
 {
 	int		err;

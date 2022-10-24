@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 20:12:01 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 14:40:36 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:25:22 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:25:23 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

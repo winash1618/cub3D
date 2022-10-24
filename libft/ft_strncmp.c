@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 19:55:05 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 20:24:42 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:26:41 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:26:42 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

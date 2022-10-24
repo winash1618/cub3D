@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/02 13:22:31 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/08 14:30:24 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/10/24 07:27:42 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:27:43 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	*get_next_line(int fd)
 	if (!str)
 		return (s);
 	str = ft_nline(str);
-	if(str && *str == '\0')
+	if (str && *str == '\0')
 	{
 		free(str);
 		str = NULL;

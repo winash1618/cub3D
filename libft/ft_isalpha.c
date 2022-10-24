@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 19:11:03 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 09:58:06 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:22:32 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:22:33 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

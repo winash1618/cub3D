@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 19:03:23 by ayassin           #+#    #+#             */
-/*   Updated: 2022/04/26 09:40:53 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:25:39 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:25:40 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

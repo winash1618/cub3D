@@ -6,12 +6,20 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:47:54 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:41:00 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/24 09:51:19 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief here we start ray casting this one of the seven function used for
+ * ray casting.
+ * 
+ * @param img data structure related image
+ * @param loc data structure for raycasting only it contains all the local
+ * variable need for raycasting.
+ */
 void	raycast_help1(t_data *img, t_loc *loc)
 {
 	loc->camerax = 2 * loc->x / (double)(SCREENWIDTH) - 1;
@@ -29,6 +37,18 @@ void	raycast_help1(t_data *img, t_loc *loc)
 		loc->deltadisty = fabs(1 / loc->raydiry);
 }
 
+/**
+ * @brief here we get the value step in x direction and y direction
+ * it is either positive one or negative one
+ * setdistx distance to move in x direction(left or rigth) to reach x
+ * side of the box
+ * setdisty distance to move in y direction(left or rigth) to reach y
+ * side of the box
+ * 
+ * @param img data structure related image
+ * @param loc data structure for raycasting only it contains all the local
+ * variable need for raycasting.
+ */
 void	raycast_help2(t_data *img, t_loc *loc)
 {
 	if (loc->raydirx < 0)
@@ -53,6 +73,13 @@ void	raycast_help2(t_data *img, t_loc *loc)
 	}
 }
 
+/**
+ * @brief DDA algorithm to find when we will hit the wall
+ * 
+ * @param img data structure related image
+ * @param loc data structure for raycasting only it contains all the local
+ * variable need for raycasting.
+ */
 void	raycast_help3(t_data *img, t_loc *loc)
 {
 	while (loc->hit == 0)
@@ -75,6 +102,16 @@ void	raycast_help3(t_data *img, t_loc *loc)
 	}
 }
 
+/**
+ * @brief find the perpendicular wall distance in terms of screenheight to
+ * get the wall height along the screen width to get the 3D view. then save
+ * where to start drawing the wall and where to end drawing the wall along the
+ * screen height.
+ * 
+ * @param img data structure related graphical part of the game
+ * @param loc data structure for raycasting only it contains all the local
+ * variable need for raycasting.
+ */
 void	raycast_help4(t_data *img, t_loc *loc)
 {
 	if (loc->side == 0)
@@ -83,7 +120,7 @@ void	raycast_help4(t_data *img, t_loc *loc)
 		loc->perpwalldist = (loc->sidedisty - loc->deltadisty);
 	loc->lineheight = (int)(SCREENHEIGHT / loc->perpwalldist);
 	img->drawstart = -loc->lineheight / 2 + SCREENHEIGHT / 2;
-		img->drawend = loc->lineheight / 2 + SCREENHEIGHT / 2;
+	img->drawend = loc->lineheight / 2 + SCREENHEIGHT / 2;
 	if (img->drawend >= SCREENHEIGHT)
 		img->drawend = SCREENHEIGHT - 1;
 	if (img->drawstart >= SCREENHEIGHT)

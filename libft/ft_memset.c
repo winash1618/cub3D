@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayassin <ayassin@student.42abudhabi.ae>    +#+  +:+       +#+        */
+/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 19:28:18 by ayassin           #+#    #+#             */
-/*   Updated: 2021/12/26 14:26:49 by ayassin          ###   ########.fr       */
+/*   Created: 2022/10/24 07:25:10 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/10/24 07:25:11 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
