@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 07:29:21 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 13:43:01 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:54:58 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	ft_parsing(int ac, char **av, t_parse **parse)
 		return (1);
 	*parse = (t_parse *)malloc(sizeof(t_parse));
 	(*parse)->info = ft_set_info(fd, &err);
+	if (err)
+		return (err);
 	close(fd);
 	fd = open(av[1], O_RDONLY);
 	(*parse)->map = ft_set_map(fd, &err);

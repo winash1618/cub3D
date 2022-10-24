@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 13:48:12 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 13:48:50 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:56:28 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_valid_nums(char *str, int type, int *err)
 		nums = ft_split(str, ',');
 		if (ft_tablen(nums) != 3)
 		{
-			*err = 1;
+			*err = 8;
 			ft_free_tab(nums);
 			return ;
 		}
@@ -63,7 +63,7 @@ void	ft_valid_nums(char *str, int type, int *err)
 			*err = 1;
 		if (ft_atoi(nums[0]) > 255 || ft_atoi(nums[1]) > 255
 			|| ft_atoi(nums[2]) > 255)
-			*err = 1;
+			*err = 8;
 	}
 	ft_free_tab(nums);
 }

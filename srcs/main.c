@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 16:56:41 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/22 19:56:06 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	ft_error(int err)
 		printf("Error: Invalid File Name.\n");
 	else if (err == 7)
 		printf("Error: Invalid Arguments.\n");
+	else if (err == 8)
+		printf("Error: Invalid Nums\n");
 	else
 		printf("Error: ...\n");
 }
