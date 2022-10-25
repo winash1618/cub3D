@@ -6,14 +6,33 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 19:21:13 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:42:10 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:08:01 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_exit(void)
+int	ft_exit(t_data *img)
 {
+	int		index;
+	char	**str;
+
+	index = 0;
+	str = img->i;
+	while (str[index] != NULL)
+	{
+		free(str[index]);
+		str[index++] = NULL;
+	}
+	free(str);
+	str = img->s;
+	index = 0;
+	while (str[index] != NULL)
+	{
+		free(str[index]);
+		str[index++] = NULL;
+	}
+	free(str);
 	exit (1);
 	return (0);
 }
@@ -58,7 +77,7 @@ void	ft_clear_maps(char ***tab)
 	if (tab[0])
 		ft_free_tab(tab[0]);
 	if (tab[1])
-		ft_free_tab(tab[0]);
+		ft_free_tab(tab[1]);
 	free(tab);
 }
 

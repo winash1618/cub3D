@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 21:46:21 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:06:48 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,23 @@ enum	e_type
 typedef struct s_info
 {
 	struct s_info	*prev;
-	char			*data; // path_to_the_west_texture
-	// we need to check if the path is valid, else exit
-	enum e_type type; // WE
-	// for F and C, we need to check if the data is valid, else exit
-	// check commas, split (,), check if num, check num  0 < 255.
-	struct s_info *next; // not more than 6
-} t_info;
+	char			*data;
+	enum e_type		type;
+	struct s_info	*next;
+}					t_info;
 
 typedef struct s_map
 {
-	struct s_map *prev;
-	char *data; // 1, 0, [N, S, E, W] (only one of them should survive)
-	// no new line after a line
-	// each 0 should not have a space around it
-	// each line should begin and end with 1
-	struct s_map *next;
-} t_map;
+	struct s_map	*prev;
+	char			*data;
+	struct s_map	*next;
+}					t_map;
 
 typedef struct s_parse
 {
 	t_info	*info;
 	t_map	*map;
-} t_parse;
+}			t_parse;
 /*------------------FT_INFO------------------*/
 void	ft_error(int err);
 void	ft_check_path(t_info *info, int *err);
@@ -113,14 +107,14 @@ int		ft_is_begmap(char *tmp);
 int		ft_start_point(char *str);
 int		ft_is_linemap(char *tmp);
 void	ft_map_helper_2(char *line, char **tmp, int *end_map);
-int		ft_map_helper_1(char **tmp, int *is_already_map, int *start_point, t_map **map);
+int		ft_map_helper_1(char **tmp, int *is_already_map,
+			int *start_point, t_map **map);
 int		ft_no_line(char **line, int fd, int *err, int *end_map);
 int		ft_map_helper_3(char **line, int *err, int *is_already_map);
-void	init_ft_set_map(t_map **map, int *is_already_map, int *start_point, int *end_map);
-/*-------------------------------------------*/
-/*-----------------------------------------------*/
+void	init_ft_set_map(t_map **map, int *is_already_map,
+			int *start_point, int *end_map);
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void			*img;
 	void			*win;
@@ -187,7 +181,7 @@ void	ft_error(int err);
 char	***create_map(t_parse *data);
 int		key_check(int keycode, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		ft_exit(void);
+int		ft_exit(t_data *img);
 void	raycast_help1(t_data *img, t_loc *loc);
 void	raycast_help2(t_data *img, t_loc *loc);
 void	raycast_help3(t_data *img, t_loc *loc);

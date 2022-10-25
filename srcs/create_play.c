@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:39:05 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 08:30:23 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/25 06:58:25 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	ft_init_player(t_data *img)
 /**
  * @brief Organise the map after parsing, here we are doing four
  * things first we convert data structure after parsing that contains
- * two linked list related to info and map into an array double string
+ * two linked list related to info and map into double string
  * array then we save map info in double array in to img->i and map data
  * in double array in to img->s. after that we get the floor color
  * from img->i[F] which contain floor color in string (r,g,b) format store

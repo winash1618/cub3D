@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/22 20:57:33 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/25 15:20:19 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ OBJS		+=	$(addprefix $(PARSER_DIR)/, $(PARSER:%c=%o))
 
 CC			=	gcc
 
-CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast -fsanitize=address
+CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast 
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@

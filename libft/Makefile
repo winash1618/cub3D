@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 07:27:50 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/24 07:27:51 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/10/24 12:47:27 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,11 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	  ft_striteri.c ft_strjoin.c ft_strlen.c ft_strmapi.c ft_strtrim.c\
 	  ft_substr.c get_next_line.c ft_strcmp.c
 
-BONUS = ft_lstadd_front.c ft_lstadd_back.c ft_lstclear.c ft_lstclear.c\
-		ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c\
-		ft_lstsize.c
-
 CC = gcc
 
 CFLAGS = -g3 -Werror -Wall -Wextra
 
 OBJS = $(SRC:.c=.o)
-
-BNSOBJS = $(BONUS:.c=.o)
 
 all: $(NAME)
 
@@ -40,11 +34,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar cr $(NAME) $(OBJS)
 
-bonus: $(BNSOBJS) $(OBJS)
-	ar cr $(NAME) $(BNSOBJS) $(OBJS)
-
 clean:
-	rm -f $(OBJS)  $(BNSOBJS)
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)

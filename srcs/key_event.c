@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:21:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 09:14:04 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:25:47 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,11 @@ int	key_check(int keycode, t_data *img)
 	key_check_rightleft(keycode, img);
 	key_check_rotate(keycode, img);
 	if (keycode == 53)
-	{
-		exit(1);
-	}
+		ft_exit(img);
+	mlx_destroy_image(img->mlx, img->img);
+	img->img = mlx_new_image(img->mlx, SCREENWIDTH, SCREENHEIGHT);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	raycast(img);
 	return (0);
 }

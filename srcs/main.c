@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 07:36:48 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:34:57 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	main(int ac, char **av)
 	image_putter(&img);
 	raycast(&img);
 	mlx_hook(img.win, 2, 0, key_check, &img);
-	mlx_hook(img.win, 17, 1L << 17, ft_exit, 0);
+	mlx_hook(img.win, 17, 1L << 17, ft_exit, &img);
 	mlx_loop(img.mlx);
 	return (0);
 }
