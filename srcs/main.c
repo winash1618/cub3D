@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 19:56:06 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:22:46 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,7 @@ void	ft_error(int err)
 
 int main(int ac, char **av)
 {
-	int		err;
-	t_parse	*parse;
-
-	err = 0;
-	parse = NULL;
-	err = ft_parsing(ac, av, &parse);
-	if(parse)
-		ft_check_path(parse->info, &err);
-	if (err)
-	{
-		ft_error(err);
-		ft_parse_clear(&parse);
-		return (0);
-	}
-	ft_parse_clear(&parse);
-	
-
+	ft_parsing(ac, av);
 	/*----------------------------------------------------------------*/
 	// t_data	img;
 	// img.mlx = mlx_init();

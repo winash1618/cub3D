@@ -1,55 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_set_map.c                                       :+:      :+:    :+:   */
+/*   ft_save_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 10:40:04 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 08:35:21 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/11/03 20:27:18 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/11/03 21:53:05 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-void	ft_set_helper(int *err, int *i, t_map *map)
+int	ft_spaces(char *line)
 {
-	if (!(*err))
-		*err = ft_check_map(map);
-	if (*i != 1)
-		*err = 3;
+	char	*str;
+
+	str = line;
+	while (*str == ' ')
+		str++;
+	if (!str || !ft_strcmp(str, "\n"))
+		return (1);
+	return (0);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-// i[3] == is_already_map, start_point, end_map
-/*----------------------------------------------------*/
-t_map	*ft_set_map(int fd, int *err)
+int	ft_get_type(char *line)
 {
-	t_map	*map;
-	char	*line;
-	char	*tmp;
-	int		i[3];
+	(void)	line;
+	int		type;
 
-	init_ft_set_map(&map, &i[0], &i[1], &i[2]);
+	type = 0;
+
+	return (type);
+}
+/*----------------------------------------------------*/
+
+/*----------------------------------------------------*/
+t_file	*ft_save_file(char *str, int *err)
+{
+	t_file	*file;
+	int		fd;
+	char	*line;
+
+	file = NULL;
+	line = NULL;
+	fd = open(str, O_RDONLY);
+	if(fd == -1)
+		*err = 1;
 	while (1)
 	{
-		if (ft_no_line(&line, fd, err, &i[2]))
+		line = get_next_line(fd);
+		if (line == NULL)
 			break ;
-		if (!ft_strncmp(line, "\n", 1) || ft_spaces(line))
-		{
-			if (!ft_map_helper_3(&line, err, &i[0]))
-				break ;
-			continue ;
-		}
-		ft_map_helper_2(line, &tmp, &i[2]);
-		*err = ft_map_helper_1(&tmp, &i[0], &i[1], &map);
+		if (!file)
+			file = ft_file_new(line);
+		else
+			ft_file_add_back(&file, ft_file_new(line));
 		free(line);
-		line = NULL;
 	}
-	ft_set_helper(err, &(i[1]), map);
-	ft_print_map(map);
-	return (map);
+	close(fd);
+	return (file);
 }
 /*----------------------------------------------------*/
