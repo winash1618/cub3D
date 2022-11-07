@@ -1,42 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_clean_file.c                                    :+:      :+:    :+:   */
+/*   ft_set_info.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 21:39:34 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/07 20:30:02 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/11/07 19:44:25 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/11/07 20:16:56 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-t_file	*ft_clean_file(t_file *file)
+int	ft_line_digit(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			i++;
+		else
+			break ;
+	}
+	return (ft_isdigit(line[i]));
+}
+/*----------------------------------------------------*/
+
+/*----------------------------------------------------*/
+t_file	*ft_save_info(t_file *file)
 {
 	t_file	*tmp;
 	t_file	*new_file;
-	char	*line;
 
-	new_file = NULL;
 	tmp = file;
+	new_file = NULL;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->line, "\n") || ft_spaces(tmp->line))
-			tmp = tmp->next;
+		if (ft_line_digit(tmp->line))
+			break ;
+		if (!new_file)
+			new_file = ft_file_new(tmp->line);
 		else
-		{
-			line = ft_strtrim(tmp->line, "\n");
-			if (!new_file)	
-				new_file = ft_file_new(line);
-			else
-				ft_file_add_back(&new_file, ft_file_new(line));
-			free(line);
-			tmp = tmp->next;
-		}
+			ft_file_add_back(&new_file, ft_file_new(tmp->line));
+		tmp = tmp->next;
 	}
-	ft_file_clear(&file);
 	return (new_file);
 }
 /*----------------------------------------------------*/

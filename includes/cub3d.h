@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/03 22:19:32 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/07 20:25:42 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ void	ft_file_print(t_file *lst);
 t_file	*ft_clean_file(t_file *file);
 int		ft_spaces(char *line);
 /*------------------FT_SAVE_FILE------------------*/
+
+/*----------------FT_SET_INFO---------------------*/
+t_file	*ft_save_info(t_file *file);
+int	ft_line_digit(char *line);
+/*------------------------------------------------*/
+
+/*----------------FT_SET_MAP---------------------*/
+t_file	*ft_save_map(t_file *file);
+
+/*------------------------------------------------*/
 
 /*------------------FT_INFO------------------*/
 t_info	*ft_info_new(char *data, enum e_type type);
