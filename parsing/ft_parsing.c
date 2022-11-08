@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:17:14 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/07 20:27:12 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/08 16:49:55 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ void ft_parsing(int ac, char **av)
 	t_file	*map_file;
 
 	err = 0;
+	file = NULL;
+	info_file = NULL;
+	map_file = NULL;
 	file = ft_save_file(av[1], &err);
 	if (err)
 		printf("Error...\n");
@@ -33,6 +36,10 @@ void ft_parsing(int ac, char **av)
 	printf("--------------MAP_FILE\n");
 	map_file = ft_save_map(file);
 	ft_file_print(map_file);
+	/*--------------------------------*/
+	if (!ft_valid_map(map_file))
+		printf("Invalid Map\n");
+	/*--------------------------------*/
 	ft_file_clear(&map_file);
 	
 	ft_file_clear(&file);

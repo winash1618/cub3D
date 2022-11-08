@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:47:26 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/03 21:49:37 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/08 17:04:34 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ t_file	*ft_file_new(char *line)
 {
 	t_file	*file;
 
+	file = NULL;
 	file = (t_file *)malloc(sizeof(t_file));
 	if (file == NULL)
 		return (NULL);
+	file->prev = NULL;
 	file->line = ft_strdup(line);
 	file->next = NULL;
 	return (file);
@@ -37,6 +39,7 @@ void	ft_file_add_back(t_file **lst, t_file *new)
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_file_add_front(t_file **lst, t_file *new)

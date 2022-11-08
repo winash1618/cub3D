@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/07 20:25:42 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/08 14:24:55 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,11 @@ int	ft_line_digit(char *line);
 
 /*----------------FT_SET_MAP---------------------*/
 t_file	*ft_save_map(t_file *file);
-
+int		valid_line_map(char *line);
+int		ft_valid_map(t_file *file);
+int		empty_space(char *str);
+int		all_spaces(char *line);
+int		start_pos(char *str);
 /*------------------------------------------------*/
 
 /*------------------FT_INFO------------------*/
