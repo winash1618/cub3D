@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/08 14:24:55 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:18:14 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ typedef struct s_map
 	// no new line after a line
 	// each 0 should not have a space around it
 	// each line should begin and end with 1
-	int start_point;
-	int is_already_map;
-	int end_map;
 	struct s_map *next;
 } t_map;
 
@@ -89,10 +86,16 @@ int		ft_spaces(char *line);
 
 /*----------------FT_SET_INFO---------------------*/
 t_file	*ft_save_info(t_file *file);
-int	ft_line_digit(char *line);
+int		ft_line_digit(char *line);
+t_info	*ft_set_info(t_file *file, int *err);
+void	ft_free_tab(char **tab);
+int		ft_type(char *str);
+int		ft_tablen(char **tab);
+int		check_info(t_info *info);
 /*------------------------------------------------*/
 
 /*----------------FT_SET_MAP---------------------*/
+t_map	*ft_set_map(t_file *map_file);
 t_file	*ft_save_map(t_file *file);
 int		valid_line_map(char *line);
 int		ft_valid_map(t_file *file);
@@ -121,11 +124,11 @@ void	ft_print_map(t_map *lst);
 // t_info	*ft_set_info(int fd, int *err);
 // void	ft_handle_info(char *line, t_info **info, int *err);
 // void	ft_free_tab(char **tab);
-// int		ft_check_info(char *line);
 // int		ft_type(char *str);
+// int		ft_tablen(char **tab);
+// int		ft_check_info(char *line);
 // int		ft_is_map(char *line, int *err);
 // int		ft_valid_line(char *line, int i, int *err);
-// int		ft_tablen(char **tab);
 // int		ft_spaces(char *line);
 // int		ft_only_nums(char *str);
 // void	ft_valid_nums(char *str, int type, int *err);
@@ -212,12 +215,13 @@ typedef struct s_loc
 }	t_loc;
 
 /*-----------------------------------------------*/
-void		ft_parsing(int ac, char **av);
-
+int		ft_parser(char *av, t_parse **parse);
+int		ft_parsing(int ac, char **av, t_parse **parse);
+void	ft_parse_clear(t_parse **parse);
 /*-----------------------------------------------*/
-void raycast(t_data *img);
-char **create_map(int ac, char **av);
-int	key_check(int keycode, t_data *img);
+void	raycast(t_data *img);
+char	**create_map(int ac, char **av);
+int		key_check(int keycode, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif

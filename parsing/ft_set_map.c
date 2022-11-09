@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: namohamm <namohamm@student.42.ae>          +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:20:42 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/09 02:47:38 by namohamm         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:17:27 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,5 +224,26 @@ int	ft_valid_map(t_file *file)
 	if (!check_first_last(file) || !check_zero(file) || pos != 1)
 		return (0);
 	return (1);
+}
+/*----------------------------------------------------*/
+
+/*----------------------------------------------------*/
+t_map	*ft_set_map(t_file *map_file)
+{
+	t_file	*tmp;
+	t_map	*map;
+
+	tmp = map_file;
+	map = NULL;
+	while (tmp)
+	{
+		if (!map)
+			map = ft_map_new(tmp->line);
+		else
+			ft_map_add_back(&map, ft_map_new(tmp->line));
+		tmp = tmp->next;
+	}
+	ft_file_clear(&map_file);
+	return (map);
 }
 /*----------------------------------------------------*/

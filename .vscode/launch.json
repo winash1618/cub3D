@@ -20,8 +20,8 @@
       "args": [],
       "stopAtEntry": true,
       "externalConsole": false,
-      "cwd": "/Users/nass/Desktop/new",
-      "program": "/Users/nass/Desktop/new/build/Debug/outDebug",
+      "cwd": "/Users/namohamm/Desktop/cub3D copy 2",
+      "program": "/Users/namohamm/Desktop/cub3D copy 2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb"
     }

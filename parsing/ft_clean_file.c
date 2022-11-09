@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 21:39:34 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/08 11:33:32 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:27:48 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_file	*ft_clean_file(t_file *file)
 			tmp = tmp->next;
 		}
 	}
-	ft_file_clear(&file);
 	return (new_file);
 }
 /*----------------------------------------------------*/
