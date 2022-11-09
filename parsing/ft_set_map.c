@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
+/*   By: namohamm <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 20:20:42 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/08 17:50:18 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/09 02:47:38 by namohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 /*----------------------------------------------------*/
 int	start_pos(char *str)
@@ -167,7 +166,7 @@ int	ft_space_0(char *str, int i)
 /*----------------------------------------------------*/
 int	ft_space_0_part(char *str, int i)
 {
-	if (ft_strlen(str) >= i)
+	if (ft_strlen(str) <= i)
 		return (0);
 	if (str[i] && (str[i] == ' ' || str[i - 1] == ' ' || str[i + 1] == ' '))
 		return (0);
@@ -188,7 +187,9 @@ int	check_zero(t_file *file)
 		i = 0;
 		while (tmp->line[i])
 		{
-			if (tmp->line[i] == '0')
+			if (tmp->line[i] == '0' || tmp->line[i] == 'N'
+				|| tmp->line[i] == 'S' || tmp->line[i] == 'E'
+				|| tmp->line[i] == 'W') // N S E W also
 			{
 				if (tmp && !ft_space_0(tmp->line, i))
 					return (0);
