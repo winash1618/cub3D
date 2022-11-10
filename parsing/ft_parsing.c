@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:17:14 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/09 19:28:41 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 09:59:53 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,18 @@
 t_file	*ft_making_file(char *str, int *err)
 {
 	t_file	*file;
+	t_file	*file1;
 
 	file = ft_save_file(str, err);
-	if (err || !file)
+	if (!err || !file)
 	{
+		printf("err\n");
 		ft_file_clear(&file);
 		return (NULL);
 	}
-	file = ft_clean_file(file);
+	file1 = ft_clean_file(file);
 	ft_file_clear(&file);
-	ft_file_print(file);
-	return (file);
+	return (file1);
 }
 /*----------------------------------------------------*/
 
@@ -50,14 +51,19 @@ int	ft_parser(char *av, t_parse **parse)
 	info_file = ft_save_info(file);
 	(*parse)->info = ft_set_info(info_file, &err);
 	if (err || !(*parse)->info)
+	{
+		ft_file_clear(&file);
 		return (0);
+	}
 	map_file = ft_save_map(file);
-	if (!ft_valid_map(map_file))
+	if (!map_file || !ft_valid_map(map_file))
 	{
 		ft_file_clear(&map_file);
+		ft_file_clear(&file);
 		return (0);
 	}
 	(*parse)->map = ft_set_map(map_file);
+	ft_file_clear(&file);
 	return (1);
 }
 
@@ -87,12 +93,14 @@ int	ft_check_av(char *str)
 int	ft_parsing(int ac, char **av, t_parse **parse)
 {
 	if ((ac == 1) || (ac > 2) || ft_check_av(av[1]))
-		return (0);
+		return (1);
 	*parse = (t_parse *)malloc(sizeof(t_parse));
 	(*parse)->info = NULL;
 	(*parse)->map = NULL;
 	if (!ft_parser(av[1], parse))
-		return (0);
-	return (1);
+		return (1);
+	ft_print_info((*parse)->info);
+	ft_print_map((*parse)->map);
+	return (0);
 }
 /*----------------------------------------------------*/
