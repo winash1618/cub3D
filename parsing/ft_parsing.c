@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:17:14 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/10 12:44:29 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:10:37 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ int	ft_parsing(int ac, char **av, t_parse **parse)
 	(*parse)->map = NULL;
 	if (!ft_parser(av[1], parse))
 		return (1);
-	ft_print_info((*parse)->info);
-	ft_print_map((*parse)->map);
 	return (0);
 }
 /*----------------------------------------------------*/
