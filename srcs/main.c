@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/25 14:34:57 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:34:31 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void	ft_error(int err)
  */
 int	check_parse(t_parse *parse, int *err)
 {
-	if (parse)
-		ft_check_path(parse->info, err);
 	if (*err)
 	{
 		ft_error(*err);

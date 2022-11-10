@@ -6,7 +6,7 @@
 #    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/10/25 15:20:19 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/11/10 12:01:27 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ INC_DIR		=	includes
 
 SRCS		=	cub3d.c main.c key_event.c ray_caster.c ray_caster_helper.c utils.c \
 				create_play.c
+
 SRC_DIR		=	srcs
 
-PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_set_info.c ft_set_map.c\
-				ft_set_info_1.c ft_set_info_2.c ft_set_info_3.c ft_set_map_1.c\
-				ft_set_map_2.c ft_set_map_3.c\
+PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_save_file.c ft_file.c \
+				ft_clean_file.c ft_set_info.c ft_set_map.c\
 
 PARSER_DIR	=	parsing
 	
@@ -37,8 +37,8 @@ OBJS		=	$(addprefix $(SRC_DIR)/, $(SRCS:%c=%o))
 OBJS		+=	$(addprefix $(PARSER_DIR)/, $(PARSER:%c=%o))
 
 CC			=	gcc
-
-CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast 
+# -fsanitize=address
+CFLAGS		=	-g3 -Wall -Werror -Wextra -Ofast
 
 $(SRC_DIR)/%.o : $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS)  -Ilibft -Ift_printf -I $(INC_DIR) -c $^ -o $@
