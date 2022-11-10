@@ -6,28 +6,34 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:17:14 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/10 09:59:53 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:44:29 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-t_file	*ft_making_file(char *str, int *err)
+int	ft_parsing_part(t_file *file, t_parse **parse, int *err)
 {
-	t_file	*file;
-	t_file	*file1;
+	t_file	*help_file;
 
-	file = ft_save_file(str, err);
-	if (!err || !file)
+	help_file = ft_save_info(file);
+	(*parse)->info = ft_set_info(help_file, err);
+	if (*err || !(*parse)->info)
 	{
-		printf("err\n");
 		ft_file_clear(&file);
-		return (NULL);
+		return (0);
 	}
-	file1 = ft_clean_file(file);
+	help_file = ft_save_map(file);
+	if (!help_file || !ft_valid_map(help_file))
+	{
+		ft_file_clear(&help_file);
+		ft_file_clear(&file);
+		return (0);
+	}
+	(*parse)->map = ft_set_map(help_file);
 	ft_file_clear(&file);
-	return (file1);
+	return (1);
 }
 /*----------------------------------------------------*/
 
@@ -36,36 +42,19 @@ int	ft_parser(char *av, t_parse **parse)
 {
 	int		err;
 	t_file	*file;
-	t_file	*info_file;
-	t_file	*map_file;
 
 	err = 0;
-	info_file = NULL;
-	map_file = NULL;
 	file = ft_making_file(av, &err);
 	if (err || !file)
 	{
 		ft_file_clear(&file);
 		return (0);
 	}
-	info_file = ft_save_info(file);
-	(*parse)->info = ft_set_info(info_file, &err);
-	if (err || !(*parse)->info)
-	{
-		ft_file_clear(&file);
+	if (!ft_parsing_part(file, parse, &err))
 		return (0);
-	}
-	map_file = ft_save_map(file);
-	if (!map_file || !ft_valid_map(map_file))
-	{
-		ft_file_clear(&map_file);
-		ft_file_clear(&file);
-		return (0);
-	}
-	(*parse)->map = ft_set_map(map_file);
-	ft_file_clear(&file);
 	return (1);
 }
+/*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
 void	ft_parse_clear(t_parse **parse)

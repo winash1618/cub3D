@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:27:18 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/10 09:22:09 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:46:37 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ int	ft_spaces(char *line)
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-int	ft_get_type(char *line)
-{
-	(void)	line;
-	int		type;
-
-	type = 0;
-
-	return (type);
-}
-/*----------------------------------------------------*/
-
-/*----------------------------------------------------*/
 t_file	*ft_save_file(char *str, int *err)
 {
 	t_file	*file;
@@ -48,7 +36,7 @@ t_file	*ft_save_file(char *str, int *err)
 	file = NULL;
 	line = NULL;
 	fd = open(str, O_RDONLY);
-	if(fd == -1)
+	if (fd == -1)
 		*err = 1;
 	while (1)
 	{

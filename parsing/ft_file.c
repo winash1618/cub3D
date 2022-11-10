@@ -6,7 +6,7 @@
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 20:47:26 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/08 17:04:34 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:44:37 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,6 @@ void	ft_file_add_back(t_file **lst, t_file *new)
 	new->prev = tmp;
 }
 
-void	ft_file_add_front(t_file **lst, t_file *new)
-{
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	new->next = *lst;
-	*lst = new;
-}
-
 void	ft_file_clear(t_file **lst)
 {
 	t_file	*tmp;
@@ -68,9 +57,28 @@ void	ft_file_clear(t_file **lst)
 	}
 }
 
-void ft_file_print(t_file *lst)
+/*----------------------------------------------------*/
+t_file	*ft_making_file(char *str, int *err)
 {
-	t_file *tmp;
+	t_file	*file;
+	t_file	*file1;
+
+	file = ft_save_file(str, err);
+	if (!err || !file)
+	{
+		printf("err\n");
+		ft_file_clear(&file);
+		return (NULL);
+	}
+	file1 = ft_clean_file(file);
+	ft_file_clear(&file);
+	return (file1);
+}
+/*----------------------------------------------------*/
+
+void	ft_file_print(t_file *lst)
+{
+	t_file	*tmp;
 
 	tmp = lst;
 	while (tmp != NULL)

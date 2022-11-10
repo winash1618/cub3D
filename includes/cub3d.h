@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:13:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/11/10 12:36:57 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:55:29 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ typedef struct s_file
 	char			*line;
 	struct s_file	*next;
 }				t_file;
-/*------------------FT_INFO------------------*/
-// void	ft_error(int err);
-// void	ft_check_path(t_info *info, int *err);
-/*------------------FT_INFO------------------*/
+
 /*------------------FT_SAVE_FILE------------------*/
 t_file	*ft_save_file(char *str, int *err);
 t_file	*ft_file_new(char *line);
@@ -81,6 +78,7 @@ void	ft_file_clear(t_file **lst);
 void	ft_file_print(t_file *lst);
 t_file	*ft_clean_file(t_file *file);
 int		ft_spaces(char *line);
+t_file	*ft_making_file(char *str, int *err);
 /*------------------FT_SAVE_FILE------------------*/
 
 /*----------------FT_SET_INFO---------------------*/
@@ -91,6 +89,14 @@ void	ft_free_tab(char **tab);
 int		ft_type(char *str);
 int		ft_tablen(char **tab);
 int		check_info(t_info *info);
+int		ft_line_digit(char *line);
+t_file	*ft_save_info(t_file *file);
+int		ft_only_nums(char *str);
+int		ft_valid_nums(char *str, int type);
+int		ft_check_path_part(char *str);
+int		ft_check_path(t_info *info);
+int		check_types_3(t_info *info);
+int		nb_comas(char *str);
 /*------------------------------------------------*/
 
 /*----------------FT_SET_MAP---------------------*/
@@ -101,11 +107,15 @@ int		ft_valid_map(t_file *file);
 int		empty_space(char *str);
 int		all_spaces(char *line);
 int		start_pos(char *str);
+int		start_end_well(char *line);
+int		check_first_last(t_file *file);
+int		ft_space_0(char *str, int i);
+int		ft_space_0_part(char *str, int i);
+int		check_zero(t_file *file);
 /*------------------------------------------------*/
 
 /*------------------FT_INFO------------------*/
 t_info	*ft_info_new(char *data, enum e_type type);
-// t_info	*ft_info_new(char *data, enum e_type type, int *err);
 void	ft_info_add_back(t_info **lst, t_info *new);
 void	ft_info_add_front(t_info **lst, t_info *new);
 void	ft_info_clear(t_info **lst);
@@ -179,11 +189,11 @@ typedef struct s_loc
 }					t_loc;
 
 /*-----------------------------------------------*/
+int		ft_parser(char *av, t_parse **parse);
 int		ft_parsing(int ac, char **av, t_parse **parse);
 void	ft_parse_clear(t_parse **parse);
 /*-----------------------------------------------*/
 void	raycast(t_data *img);
-void	ft_error(int err);
 char	***create_map(t_parse *data);
 int		key_check(int keycode, t_data *img);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

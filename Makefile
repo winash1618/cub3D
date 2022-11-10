@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+         #
+#    By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/06 12:06:56 by mkaruvan          #+#    #+#              #
-#    Updated: 2022/11/10 12:01:27 by mkaruvan         ###   ########.fr        #
+#    Updated: 2022/11/10 13:50:46 by mkaruvan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS		=	cub3d.c main.c key_event.c ray_caster.c ray_caster_helper.c utils.c \
 SRC_DIR		=	srcs
 
 PARSER		=	ft_parsing.c ft_info.c ft_map.c ft_save_file.c ft_file.c \
-				ft_clean_file.c ft_set_info.c ft_set_map.c\
+				ft_clean_file.c ft_set_info.c ft_set_map.c ft_set_info_1.c \
+				ft_set_info_2.c ft_set_map_1.c ft_set_map_2.c\
 
 PARSER_DIR	=	parsing
 	
