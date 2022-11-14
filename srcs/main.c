@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:39 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/25 14:34:57 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 13:55:20 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,25 +56,6 @@ int	create_color(char *str)
  * 
  * @param err int value represent type of error
  */
-void	ft_error(int err)
-{
-	if (err == 1)
-		printf("Error: Invalid file.\n");
-	else if (err == 2)
-		printf("Error: Invalid file format.\n");
-	else if (err == 3)
-		printf("Error: Invalid Configuration Map.\n");
-	else if (err == 4)
-		printf("Error: Invalid line in the Map.\n");
-	else if (err == 5)
-		printf("Error: Invalid Map.\n");
-	else if (err == 6)
-		printf("Error: Invalid File Name.\n");
-	else if (err == 7)
-		printf("Error: Invalid Arguments.\n");
-	else
-		printf("Error: ...\n");
-}
 
 /**
  * @brief check for any errors in parsing
@@ -86,11 +67,9 @@ void	ft_error(int err)
  */
 int	check_parse(t_parse *parse, int *err)
 {
-	if (parse)
-		ft_check_path(parse->info, err);
 	if (*err)
 	{
-		ft_error(*err);
+		printf("Error: ...\n");
 		ft_parse_clear(&parse);
 		return (1);
 	}
