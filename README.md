@@ -1,17 +1,34 @@
-# cub3D
-This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
+# CUB3D by Nasser and Muhammed 🕺
+## PRESENTATION
+
+This project aims at reproducing a basic FPS game by using the raycasting method.
+
+## WANNA PLAY? 💥
+### Installation
+
+first, copy paste the following code on your terminal:
+
+```shell
+
+cd ~ && cd Downloads && git clone https://github.com/winash1618/cub3D.git cub3d && cd cub3d && chmod 777 Cub3D && ./cub3d map/map.cub
+
+```
+this should open a new window, and use the following commands to play around
 
 
-## Resources
-- https://lodev.org/cgtutor/raycasting.html
-- https://eastmanreference.com/complete-list-of-applescript-key-codes#:~:text=The%20enter%20key%20on%20most,accomplished%20by%20hitting%20fn%20%2B%20enter
-- https://www.youtube.com/watch?v=NbSee-XM7WA
+### Commands
 
-## gcc
-- gcc -framework OpenGL -framework AppKit cub3d.c minilibx/libmlx.a && ./a.out
+| KEY           | Action        |
+| ------------- |:-------------:|
+| `ESC`         | exit game     |
+| `A`           | move left     |
+| `D`           | move right    |
+| `W`           | move forward  |
+| `S`           | move backward |
+| `→`           | turn right    |
+| `←`           | turn left     |
 
 
-- gcc -framework OpenGL -framework AppKit parse.c minilibx/libmlx.a get_next_line/get_next_line.c get_next_line/get_next_line_utils.c -D BUFFER_SIZE=1 && ./a.out map.cub
+You can have a look at the [subject](https://github.com/winash1618/cub3D/blob/master/cub3d.pdf) for further details on how `.cub` files work.
 
-
-
+⚠️ Be careful ! All your paths must be valid and your map must be closed (but not necessarily a square 😉)
