@@ -3,53 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   ft_set_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 10:40:04 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 08:42:30 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/11/07 20:20:42 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/11/10 13:36:38 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-void	ft_set_helper(int *err, int *i, t_map *map)
+int	nb_comas(char *str)
 {
-	if (!(*err))
-		*err = ft_check_map(map);
-	if (*i != 1)
-		*err = 3;
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-// i[3] == is_already_map, start_point, end_map
-/*----------------------------------------------------*/
-t_map	*ft_set_map(int fd, int *err)
+int	ft_valid_map(t_file *file)
 {
-	t_map	*map;
-	char	*line;
-	char	*tmp;
-	int		i[3];
+	t_file	*tmp;
+	int		pos;
 
-	init_ft_set_map(&map, &i[0], &i[1], &i[2]);
-	while (1)
+	tmp = file;
+	pos = 0;
+	while (tmp)
 	{
-		if (ft_no_line(&line, fd, err, &i[2]))
-			break ;
-		if (!ft_strncmp(line, "\n", 1) || ft_spaces(line))
-		{
-			if (!ft_map_helper_3(&line, err, &i[0]))
-				break ;
-			continue ;
-		}
-		ft_map_helper_2(line, &tmp, &i[2]);
-		*err = ft_map_helper_1(&tmp, &i[0], &i[1], &map);
-		free(line);
-		line = NULL;
+		if (!valid_line_map(tmp->line))
+			return (0);
+		pos += start_pos(tmp->line);
+		tmp = tmp->next;
 	}
-	ft_set_helper(err, &(i[1]), map);
-	ft_print_map(map);
+	if (!check_first_last(file) || !check_zero(file) || pos != 1)
+		return (0);
+	return (1);
+}
+/*----------------------------------------------------*/
+
+/*----------------------------------------------------*/
+t_map	*ft_set_map(t_file *map_file)
+{
+	t_file	*tmp;
+	t_map	*map;
+
+	tmp = map_file;
+	map = NULL;
+	while (tmp)
+	{
+		if (!map)
+			map = ft_map_new(tmp->line);
+		else
+			ft_map_add_back(&map, ft_map_new(tmp->line));
+		tmp = tmp->next;
+	}
+	ft_file_clear(&map_file);
 	return (map);
 }
 /*----------------------------------------------------*/

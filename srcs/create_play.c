@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_play.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:39:05 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 08:30:23 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:43:32 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,24 @@ void	image_putter(t_data *img)
  */
 void	ft_set_player_dir(t_data *img, int j, int k)
 {
-	if (img->s[j][k] == 'S')
+	if (img->s[j][k] == 'N')
 	{
-		img->dirx = -1;
-		img->planey = 0.66;
+		img->dirx = 1;
+		img->planey = -0.66;
+	}
+	else if (img->s[j][k] == 'W')
+	{
+		img->diry = 1;
+		img->planex = 0.66;
 	}
 	else if (img->s[j][k] == 'E')
 	{
 		img->diry = -1;
 		img->planex = -0.66;
 	}
-	else if (img->s[j][k] == 'W')
-	{
-		img->diry = 1;
-		img->planex = -0.66;
-	}
 	else
 	{
-		img->dirx = 1;
+		img->dirx = -1;
 		img->planey = 0.66;
 	}
 }
@@ -91,8 +91,8 @@ void	ft_put_player(t_data *img)
 			if (img->s[j][k] == 'W' || img->s[j][k] == 'N'
 				|| img->s[j][k] == 'S' || img->s[j][k] == 'E')
 			{
-				img->posx = j;
-				img->posy = k;
+				img->posx = j + 0.5;
+				img->posy = k + 0.5;
 				ft_set_player_dir(img, j, k);
 				break ;
 			}
@@ -123,7 +123,7 @@ void	ft_init_player(t_data *img)
 /**
  * @brief Organise the map after parsing, here we are doing four
  * things first we convert data structure after parsing that contains
- * two linked list related to info and map into an array double string
+ * two linked list related to info and map into double string
  * array then we save map info in double array in to img->i and map data
  * in double array in to img->s. after that we get the floor color
  * from img->i[F] which contain floor color in string (r,g,b) format store

@@ -5,79 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 13:43:58 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 16:51:15 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/11/10 13:02:47 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/11/10 13:04:00 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-int	ft_check_path_part(char *str)
+int	ft_type(char *str)
 {
-	int	fd;
+	int	ret;
 
-	fd = open(str, O_RDONLY);
-	if (fd < 0)
-	{
-		close(fd);
-		return (1);
-	}
-	close(fd);
-	if (!ft_strcmp(ft_strrchr(str, '.'), ".xpm"))
-		return (0);
-	return (1);
+	if (ft_strcmp(str, "NO") == 0)
+		ret = 0;
+	else if (ft_strcmp(str, "SO") == 0)
+		ret = 1;
+	else if (ft_strcmp(str, "WE") == 0)
+		ret = 2;
+	else if (ft_strcmp(str, "EA") == 0)
+		ret = 3;
+	else if (ft_strcmp(str, "F") == 0)
+		ret = 4;
+	else if (ft_strcmp(str, "C") == 0)
+		ret = 5;
+	else
+		ret = 6;
+	return (ret);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_check_path(t_info *info, int *err)
-{
-	t_info	*tmp;
-
-	tmp = info;
-	if (*err)
-		return ;
-	while (tmp != NULL)
-	{
-		if (*err)
-			break ;
-		if (tmp->type == NO || tmp->type == SO
-			|| tmp->type == WE
-			|| tmp->type == EA)
-			*err = ft_check_path_part(tmp->data);
-		tmp = tmp->next;
-	}
-}
-/*----------------------------------------------------*/
-
-/*----------------------------------------------------*/
-void	print_tab(char **nums)
+void	ft_free_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (nums[i])
+	if (!tab)
+		return ;
+	while (tab[i])
 	{
-		printf("[%s]\n", nums[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-int	ft_only_nums(char *str)
+int	ft_tablen(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (tab[i])
+		i++;
+	return (i);
+}
+/*----------------------------------------------------*/
+
+/*----------------------------------------------------*/
+int	ft_line_digit(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
 	{
-		if (ft_isdigit(str[i]) || str[i] == ',')
+		if (line[i] == ' ')
 			i++;
 		else
-			return (0);
+			break ;
 	}
-	return (1);
+	return (ft_isdigit(line[i]));
+}
+/*----------------------------------------------------*/
+
+/*----------------------------------------------------*/
+t_file	*ft_save_info(t_file *file)
+{
+	t_file	*tmp;
+	t_file	*new_file;
+
+	tmp = file;
+	new_file = NULL;
+	while (tmp)
+	{
+		if (ft_line_digit(tmp->line))
+			break ;
+		if (!new_file)
+			new_file = ft_file_new(tmp->line);
+		else
+			ft_file_add_back(&new_file, ft_file_new(tmp->line));
+		tmp = tmp->next;
+	}
+	return (new_file);
 }
 /*----------------------------------------------------*/

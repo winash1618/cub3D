@@ -5,109 +5,110 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/22 13:48:12 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/22 13:48:50 by mkaruvan         ###   ########.fr       */
+/*   Created: 2022/11/10 13:08:15 by mkaruvan          #+#    #+#             */
+/*   Updated: 2022/11/10 13:38:26 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*----------------------------------------------------*/
-char	*ft_rm_spaces(char *str)
+int	ft_only_nums(char *str)
 {
-	int		i;
-	int		len;
-	int		j;
-	char	*new;
+	int	i;
 
 	i = 0;
-	j = 0;
-	while (str[i] == ' ')
-		i++;
-	len = ft_strlen(str) - i;
-	new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
 	while (str[i])
 	{
-		new[j] = str[i];
-		i++;
-		j++;
+		if (ft_isdigit(str[i]) || str[i] == ',')
+			i++;
+		else
+			return (0);
 	}
-	return (new);
+	return (1);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_valid_nums(char *str, int type, int *err)
+int	ft_valid_nums(char *str, int type)
 {
 	char	**nums;
+	int		ret;
 
+	ret = 1;
 	nums = NULL;
+	if (!str)
+		return (0);
 	if (type == F || type == C)
 	{
 		if (!ft_only_nums(str))
-		{
-			*err = 1;
-			return ;
-		}
+			ret = 0;
 		nums = ft_split(str, ',');
-		if (ft_tablen(nums) != 3)
-		{
-			*err = 1;
-			ft_free_tab(nums);
-			return ;
-		}
-		if (ft_strlen(nums[0]) > 3 || ft_strlen(nums[1]) > 3
-			|| ft_strlen(nums[2]) > 3)
-			*err = 1;
+		if (ft_tablen(nums) != 3 || nb_comas(str) != 2)
+			ret = 0;
 		if (ft_atoi(nums[0]) > 255 || ft_atoi(nums[1]) > 255
 			|| ft_atoi(nums[2]) > 255)
-			*err = 1;
+			ret = 0;
+		if (ft_atoi(nums[0]) < 0 || ft_atoi(nums[1]) < 0
+			|| ft_atoi(nums[2]) < 0)
+			ret = 0;
 	}
+	else
+		return (1);
 	ft_free_tab(nums);
+	return (ret);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-int	ft_spaces(char *line)
+int	ft_check_path_part(char *str)
 {
-	char	*str;
+	int	fd;
 
-	str = line;
-	while (*str == ' ')
-		str++;
-	if (!str || !ft_strcmp(str, "\n"))
+	fd = open(str, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	close(fd);
+	if (!ft_strcmp(ft_strrchr(str, '.'), ".xpm"))
 		return (1);
 	return (0);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-void	ft_free_tab(char **tab)
+int	ft_check_path(t_info *info)
 {
-	int	i;
+	t_info	*tmp;
+	int		ret;
 
-	i = 0;
-	if (!tab)
-		return ;
-	while (tab[i])
+	ret = 1;
+	tmp = info;
+	while (tmp)
 	{
-		free(tab[i]);
-		i++;
+		if (!ret)
+			break ;
+		if (tmp->type == NO || tmp->type == SO
+			|| tmp->type == WE
+			|| tmp->type == EA)
+			ret = ft_check_path_part(tmp->data);
+		tmp = tmp->next;
 	}
-	free(tab);
+	return (ret);
 }
 /*----------------------------------------------------*/
 
 /*----------------------------------------------------*/
-int	ft_tablen(char **tab)
+int	check_types_3(t_info *info)
 {
-	int	i;
+	t_info	*tmp;
 
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
+	tmp = info;
+	while (tmp)
+	{
+		if (!ft_valid_nums(tmp->data, tmp->type))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 /*----------------------------------------------------*/

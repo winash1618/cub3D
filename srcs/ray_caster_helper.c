@@ -6,7 +6,7 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 18:47:54 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 09:51:19 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 12:35:20 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 /**
  * @brief here we start ray casting this one of the seven function used for
  * ray casting.
+ * remember that deltadistx and deltadisty will allway be greater than zero.
+ * also sidedistx and sidedisty will allways by greater than or equal to zero.
+ * camerax is ranges from -1 to 1
+ * planex = 0, planey = 0.66, dirx = 1, diry = 0  North
+ * planex = -0.66, planey = 0, dirx = 0, diry = -1  East
+ * planex = 0, planey = 0.66, dirx = -1, diry = 0  South
+ * planex = -0.66, planey = 0, dirx =0 , diry = 1  West
+ * loc->camerax ranges -1 to 1 in the begining it will be -1 when loc->x
+ * increases camerax also increases till -1.
  * 
  * @param img data structure related image
  * @param loc data structure for raycasting only it contains all the local
@@ -115,9 +124,10 @@ void	raycast_help3(t_data *img, t_loc *loc)
 void	raycast_help4(t_data *img, t_loc *loc)
 {
 	if (loc->side == 0)
-		loc->perpwalldist = (loc->sidedistx - loc->deltadistx);
+		loc->perpwalldist = loc->sidedistx - loc->deltadistx;
 	else
-		loc->perpwalldist = (loc->sidedisty - loc->deltadisty);
+		loc->perpwalldist = loc->sidedisty - loc->deltadisty;
+	fflush(stdout);
 	loc->lineheight = (int)(SCREENHEIGHT / loc->perpwalldist);
 	img->drawstart = -loc->lineheight / 2 + SCREENHEIGHT / 2;
 	img->drawend = loc->lineheight / 2 + SCREENHEIGHT / 2;

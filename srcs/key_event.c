@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mkaruvan <namohamm@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 17:21:50 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 09:14:04 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:45:51 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	key_check_rotate(int keycode, t_data *img)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	if (keycode == 123)
+	if (keycode == 124)
 	{
 		old_dir_x = img->dirx;
 		img->dirx = img->dirx * cos(-ROTSPEED) - img->diry * sin(-ROTSPEED);
@@ -91,7 +91,7 @@ void	key_check_rotate(int keycode, t_data *img)
 		img->planey = old_plane_x * sin(-ROTSPEED)
 			+ img->planey * cos(-ROTSPEED);
 	}
-	if (keycode == 124)
+	if (keycode == 123)
 	{
 		old_dir_x = img->dirx;
 		img->dirx = img->dirx * cos(ROTSPEED) - img->diry * sin(ROTSPEED);
@@ -117,9 +117,11 @@ int	key_check(int keycode, t_data *img)
 	key_check_rightleft(keycode, img);
 	key_check_rotate(keycode, img);
 	if (keycode == 53)
-	{
-		exit(1);
-	}
+		ft_exit(img);
+	mlx_destroy_image(img->mlx, img->img);
+	img->img = mlx_new_image(img->mlx, SCREENWIDTH, SCREENHEIGHT);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	raycast(img);
 	return (0);
 }

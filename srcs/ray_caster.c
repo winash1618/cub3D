@@ -6,12 +6,20 @@
 /*   By: mkaruvan <mkaruvan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 12:11:48 by mkaruvan          #+#    #+#             */
-/*   Updated: 2022/10/24 09:40:57 by mkaruvan         ###   ########.fr       */
+/*   Updated: 2022/10/25 07:05:10 by mkaruvan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/**
+ * @brief This funciton adds pixels along the screenheight using my_mlx_pixel_put
+ * we have the location of the pixel on the screen and the color of the pixel
+ * 
+ * @param img data structure related graphical part of the game
+ * @param loc data structure for raycasting only it contains all the local
+ * variable need for raycasting.
+ */
 void	raycast_help6(t_data *img, t_loc *loc)
 {
 	unsigned int	i;
@@ -95,7 +103,8 @@ void	raycast_help5(t_data *img, t_loc *loc)
  * raycast_help3 is for DDA algorithm
  * raycast_help4 is for finding wall height and where it starts and end
  * raycast_help5 is for find the color of each pixel in the screen
- * raycast_help6 is for put the 
+ * raycast_help6 is for storing pixel data in to memory so that later
+ * we can display it.
  * 
  * @param img data structure related to the graphical part of the game.
  * @param x int value corresponding to the where we are in the width of
